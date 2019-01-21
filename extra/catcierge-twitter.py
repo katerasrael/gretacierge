@@ -18,7 +18,7 @@ def main():
 	parser.add_argument("--consumer_key", metavar = "CONSUMER_KEY", 
 					help = "The twitter Consumer Key to use for authentication")
 
-	parser.add_argument("--consumer_secret", metavar = "CONSUMER_KEY",
+	parser.add_argument("--consumer_secret", metavar = "CONSUMER_SECRET",
 					help = "The twitter Consumer Secret to use for authentication")
 
 	parser.add_argument("--oauth_token", metavar = "OAUTH_TOKEN",
