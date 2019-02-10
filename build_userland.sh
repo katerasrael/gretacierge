@@ -2,7 +2,7 @@
 
 pushd rpi_userland
 
-if [ "armv6l" = `arch` ]; then
+if [ "armv6l" = `arch` ] | [ "armv7l" = `arch` ]; then
 	# Native compile on the Raspberry Pi
 	mkdir -p build/raspberry/release
 	pushd build/raspberry/release
