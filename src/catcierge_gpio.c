@@ -47,10 +47,12 @@ static int write_num_to_file(const char *path, int num)
 	}
 
 	written = snprintf(buf, sizeof(buf), "%d", num);
+
+	ret = write(fd, buf, strlen(buf));
 	
-	if (write(fd, buf, strlen(buf)) < 0)
+	if (ret < 0)
 	{
-		CATERR("Failed to write \"%s\" to %s\n", buf, path);
+		CATERR("Failed to write \"%s\" to %s - ret=%d\n", buf, path, ret);
 	}
 
 	close(fd);
@@ -85,9 +87,11 @@ int gpio_set_direction(int pin, int direction)
 
 	str = direction ? "in" : "out";
 	
-	if (write(fd, str, strlen(str)) < 0)
+	ret = write(fd, str, strlen(str));
+
+	if (ret < 0)
 	{
-		CATERR("Failed to write \"%s\" to %s\n", str, path);
+		CATERR("Failed to write \"%s\" to %s - ret=%d\n", str, path, ret);
 		//ret = -2;
 	}
 
