@@ -7,7 +7,7 @@
 
 Catcierge
 =========
-![Catcierge](https://raw.githubusercontent.com/JoakimSoderberg/catcierge-examples/master/diy/small_logo.jpg)
+![Gretacierge](https://raw.githubusercontent.com/katerasrael/gretacierge-examples/master/diy/small_logo.jpg)
 
 Catcierge is an image recognition and RFID detection system for a DIY cat door.
 It can be used to detect prey that the cat tries to bring in,
@@ -78,12 +78,12 @@ $ sudo apt-get install cmake opencv-dev build-essential
 Then to build:
 
 ```bash
-$ git clone https://github.com/JoakimSoderberg/catcierge.git
-$ cd catcierge
-$ git submodule update --init # For the rpi userland sources.
-$ ./build_userland.sh
+$ git clone https://github.com/katerasrael/gretacierge.git
+$ cd gretacierge
+### $ git submodule update --init # For the rpi userland sources.
+### $ ./build_userland.sh
 $ mkdir build && cd build
-$ cmake -DWITH_ZMQ=OFF ..  # Raspbian has no CZMQ package.
+$ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF  # Raspbian has no CZMQ package.
 $ make
 ```
 
