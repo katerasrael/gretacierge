@@ -289,8 +289,12 @@ if (RPI)
 		${RPI_USERLAND}/include/interface/mmal/
 		${RPI_USERLAND}/include/interface/khronos/include/
 		${RPI_USERLAND}/include/
+		${RPI_USERLAND}/interface/vcos/pthreads/
+		${RPI_USERLAND}/interface/vmcs_host/linux/
+		${RPI_USERLAND}/interface/mmal/
+		${RPI_USERLAND}/interface/khronos/include/
+		${RPI_USERLAND}/
 		${PROJECT_SOURCE_DIR}/rpi_userland/include/
-		${PROJECT_SOURCE_DIR}/../userland/include/
 		${PROJECT_SOURCE_DIR}/src/raspicam_cv
 		)
 
