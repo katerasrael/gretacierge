@@ -304,11 +304,11 @@ if (RPI)
 	add_library(raspicamcv ${RASPICAM_SRC})
 
 	set(RASPICAM_LIBS
-		${RPI_USERLAND}/lib/libmmal_core.so
-		${RPI_USERLAND}/lib/libmmal.so
-		${RPI_USERLAND}/lib/libmmal_util.so
-		${RPI_USERLAND}/lib/libvcos.so
-		${RPI_USERLAND}/lib/libbcm_host.so
+		${RPI_USERLAND}/build/lib/libmmal_core.so
+		${RPI_USERLAND}/build/lib/libmmal.so
+		${RPI_USERLAND}/build/lib/libmmal_util.so
+		${RPI_USERLAND}/build/lib/libvcos.so
+		${RPI_USERLAND}/build/lib/libbcm_host.so
 #		m
 		)
 
