@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include "interface/mmal/mmal.h"
+#include <interface/mmal/mmal.h>
 #include "interface/mmal/mmal_logging.h"
 #include "interface/mmal/mmal_buffer.h"
 #include "interface/mmal/util/mmal_util.h"

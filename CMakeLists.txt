@@ -290,7 +290,7 @@ if (RPI)
 		${RPI_USERLAND}/include/interface/khronos/include/
 		${RPI_USERLAND}/include/
 		${PROJECT_SOURCE_DIR}/rpi_userland/include/
-		/home/pi/userland/include/
+		${PROJECT_SOURCE_DIR}/../userland/include/
 		${PROJECT_SOURCE_DIR}/src/raspicam_cv
 		)
 
@@ -502,8 +502,8 @@ if (UNIX)
 	set(CPACK_PACKAGE_VERSION_MAJOR "${CATCIERGE_VERSION_MAJOR}")
 	set(CPACK_PACKAGE_VERSION_MINOR "${CATCIERGE_VERSION_MINOR}")
 	set(CPACK_PACKAGE_VERSION_PATCH "${CATCIERGE_VERSION_PATCH}")
-	set(CPACK_PACKAGE_VENDOR "Joakim Soderberg")
-	set(CPACK_PACKAGE_CONTACT "https://github.com/JoakimSoderberg/catcierge")
+	set(CPACK_PACKAGE_VENDOR "Andreas Bär")
+	set(CPACK_PACKAGE_CONTACT "https://github.com/katerasrael/gretacierge")
 	set(CPACK_GENERATOR DEB;TGZ)
 
 	set(CPACK_PACKAGE_NAME "catcierge")
@@ -532,7 +532,7 @@ if (UNIX)
 	if (WITH_ZMQ)
 		set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, libzmq-dev")
 	endif()
-	set(CPACK_DEBIAN_PACKAGE_MAINTAINER "joakim.soderberg@gmail.com")
+	set(CPACK_DEBIAN_PACKAGE_MAINTAINER "asbaer@asrael.franken.de")
 	set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "${LINUX_PACKAGE_DESCRIPTION}")
 	set(CPACK_DEBIAN_PACKAGE_SECTION "Miscellaneous")
 	set(CPACK_DEBIAN_PACKAGE_PRIORITY "extra")

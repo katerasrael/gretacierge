@@ -41,7 +41,7 @@
 #include "bcm_host.h"
 #include "interface/vcos/vcos.h"
 
-#include "interface/mmal/mmal.h"
+#include <interface/mmal/mmal.h>
 #include "interface/mmal/mmal_logging.h"
 #include "interface/mmal/mmal_buffer.h"
 #include "interface/mmal/util/mmal_util.h"
