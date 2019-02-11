@@ -79,6 +79,9 @@ uservar=to_email test@example.com
 uservar=from_email test2@example.com
 uservar=from_email_passw my_secret
 
+uservar=telegram_bot_token example_token
+uservar=telegram_bot_chat_id example_chat_id
+
 # If you look inside:
 #   ${CMAKE_INSTALL_PREFIX}/share/catcierge/templates/compose_script.sh.in
 # you can see that this script requires them, so if you omit them you'll get an
@@ -92,6 +95,9 @@ uservar=from_email_passw my_secret
 # - Mail the result to the specified mail.
 #match_group_done_cmd="%template_path:compose_script%" && rm "%template_path:compose_script%"
 
+
+####### Output composed image with debug & telegram it #######
+#match_group_done_cmd=python ${CMAKE_INSTALL_PREFIX}/share/catcierge/catcierge-telegram.py --json "%template_path:catcierge_event%" --steps --output "%match_group_id%-combined-steps.png" --bot_token %telegram_bot_token% --bot_chat_id %telegram_bot_chat_id% 
 
 
 
