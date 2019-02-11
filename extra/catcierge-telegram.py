@@ -88,15 +88,15 @@ def create_row(imgs, offsets, gap, fixed_width=0, caption=None, caption_offset=(
 
 def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, description=None, caption="Catcierge", state="undefined", direction="undefined"):
 
-    if state is "Lockout":
+    if state == "Lockout":
         background_color =  "#ff0000"   #red
-    elif state is "Keep open":
-        background_color =  "#7FFF00"   #green
+    elif state == "Keep open":
+        background_color =  "#ADFF2F"   #green
     else:
         background_color =  "#8A968E"   #original grey
 
     img = Image(width=600, height=1124, background=Color(background_color))
-
+        
     #print("Font path: %s" % args.fonts)
 
     font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=64)
