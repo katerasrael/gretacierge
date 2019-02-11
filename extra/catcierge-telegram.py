@@ -250,37 +250,37 @@ def create_matches(catcierge_json, output_file, args):
         img_paths = []
         log("Stepcount %d" % step_count)
         
-        if step_count == 11:
-            for step in match["steps"][:step_count]:
-                img_paths.append(os.path.join(base_path, step["path"]))
-                log(" %s" % step["path"])
-
-
-            img = compose_img(img_paths=img_paths,
-                    gap=5,
-                    description=match["description"],
-                    caption="Match %d" % i, state=catcierge_json["state"], direction=match["direction"])
-
-            total_width += img.width
-            total_height = max(total_height, img.height)
-            match_imgs.append(img)
-            i += 1
-        else: # there is an assertion in compose_adaptive_prey, that there are only 1 or 11 images - so we force it to 1 image, except 11
-            step_count = 1
-            for step in match["steps"][:step_count]:
-                img_paths.append(os.path.join(base_path, step["path"]))
+#        if step_count == 11:
+        for step in match["steps"][:step_count]:
+            img_paths.append(os.path.join(base_path, step["path"]))
             log(" %s" % step["path"])
 
 
-            img = compose_img(img_paths=img_paths,
-                    gap=5,
-                    description=match["description"],
-                    caption="Match %d" % i, state=catcierge_json["state"], direction=match["direction"])
+        img = compose_img(img_paths=img_paths,
+                gap=5,
+                description=match["description"],
+                caption="Match %d" % i, state=catcierge_json["state"], direction=match["direction"])
 
-            total_width += img.width
-            total_height = max(total_height, img.height)
-            match_imgs.append(img)
-            i += 1
+        total_width += img.width
+        total_height = max(total_height, img.height)
+        match_imgs.append(img)
+        i += 1
+#        else: # there is an assertion in compose_adaptive_prey, that there are only 1 or 11 images - so we force it to 1 image, except 11
+#            step_count = 1
+#            for step in match["steps"][:step_count]:
+#                img_paths.append(os.path.join(base_path, step["path"]))
+#            log(" %s" % step["path"])
+#
+#
+#            img = compose_img(img_paths=img_paths,
+#                    gap=5,
+#                    description=match["description"],
+#                    caption="Match %d" % i, state=catcierge_json["state"], direction=match["direction"])
+#
+#            total_width += img.width
+#            total_height = max(total_height, img.height)
+#            match_imgs.append(img)
+#            i += 1
 
 
     fimg = Image(width=total_width, height=total_height)
