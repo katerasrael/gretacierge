@@ -95,7 +95,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     else:
         background_color =  "#8A968E"   #original grey
 
-    img = Image(width=600, height=1124, background=background_color)
+    img = Image(width=600, height=1124, background=Color(background_color))
 
     #print("Font path: %s" % args.fonts)
 
