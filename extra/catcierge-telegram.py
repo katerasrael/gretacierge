@@ -100,7 +100,8 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     #print("Font path: %s" % args.fonts)
 
     font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=64)
-    font_title = Font(path="%s/alex-brush/AlexBrush-Regular.ttf" % args.fonts, size=64)
+#    font_title = Font(path="%s/alex-brush/AlexBrush-Regular.ttf" % args.fonts, size=64)
+    font_title = font
     font_math = Font(path="%s/Asana-Math/Asana-Math.otf" % args.fonts, size=64)
 
 
@@ -116,8 +117,6 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
             img_paths.append(step["path"])
 
     # TODO: Allow any matcher type and number of images...    
-#    assert len(img_paths) == 1 or len(img_paths) == 11, \
-#        "Invalid number of images %d, expected 1 or 11" % len(img_paths)   # corrected typo: expected 2 or 11 -> 1 or 11
 
     for img_path in img_paths:
         #print img_path
@@ -128,12 +127,12 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
 
     if len(img_paths) >= 1:
         orgimg = imgs[0]    # Original image.
-        img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
+        img.caption(caption + ' - ' + direction, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
     
         if description:
             desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-            text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
-            img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
+            text_width = (desc_font.size) * int((len(description)) * 0.7) # add some information about direction
+            img.caption(description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
     
         height = 120
     
@@ -250,7 +249,6 @@ def create_matches(catcierge_json, output_file, args):
         img_paths = []
         log("Stepcount %d" % step_count)
         
-#        if step_count == 11:
         for step in match["steps"][:step_count]:
             img_paths.append(os.path.join(base_path, step["path"]))
             log(" %s" % step["path"])
@@ -265,23 +263,6 @@ def create_matches(catcierge_json, output_file, args):
         total_height = max(total_height, img.height)
         match_imgs.append(img)
         i += 1
-#        else: # there is an assertion in compose_adaptive_prey, that there are only 1 or 11 images - so we force it to 1 image, except 11
-#            step_count = 1
-#            for step in match["steps"][:step_count]:
-#                img_paths.append(os.path.join(base_path, step["path"]))
-#            log(" %s" % step["path"])
-#
-#
-#            img = compose_img(img_paths=img_paths,
-#                    gap=5,
-#                    description=match["description"],
-#                    caption="Match %d" % i, state=catcierge_json["state"], direction=match["direction"])
-#
-#            total_width += img.width
-#            total_height = max(total_height, img.height)
-#            match_imgs.append(img)
-#            i += 1
-
 
     fimg = Image(width=total_width, height=total_height)
 
