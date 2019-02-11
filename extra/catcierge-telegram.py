@@ -127,11 +127,13 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
 
     if len(img_paths) >= 1:
         orgimg = imgs[0]    # Original image.
-        img.caption(caption + ' - ' + direction, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
+        text_width = (font_title.size) * int((len(caption) + 3 + len(direction)) * 0.7) # add some information about direction
+
+        img.caption(caption + ' - ' + direction, left=(img.width - text_width_) / 2, top=5, text_width, height=100, font=font_title)
     
         if description:
             desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-            text_width = (desc_font.size) * int((len(description)) * 0.7) # add some information about direction
+            text_width = (desc_font.size) * int((len(description)) * 0.7)
             img.caption(description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
     
         height = 120
