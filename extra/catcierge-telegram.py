@@ -116,111 +116,120 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
             img_paths.append(step["path"])
 
     # TODO: Allow any matcher type and number of images...    
-    assert len(img_paths) == 1 or len(img_paths) == 11, \
-        "Invalid number of images %d, expected 1 or 11" % len(img_paths)   # corrected typo: expected 2 or 11 -> 1 or 11
+#    assert len(img_paths) == 1 or len(img_paths) == 11, \
+#        "Invalid number of images %d, expected 1 or 11" % len(img_paths)   # corrected typo: expected 2 or 11 -> 1 or 11
 
     for img_path in img_paths:
         #print img_path
         imgs.append(Image(filename=img_path))
 
     mpos = lambda w: (img.width - w) / 2
+    x_start = 20
 
-    if len(img_paths) == 1:
+    if len(img_paths) >= 1:
+        orgimg = imgs[0]    # Original image.
         img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
-        img.composite(imgs[0], left=mpos(imgs[0].width), top=120)
-        return img
+    
+        if description:
+            desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
+            text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
+            img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
+    
+        height = 120
+    
+        # Original.
+        img.composite(orgimg, left=mpos(orgimg.width), top=height) 
+    
+#        img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
+#        img.composite(imgs[0], left=mpos(imgs[0].width), top=120)
+#        return img
 
-    # get the images
-    orgimg = imgs[0]    # Original image.
-    
-    detected = imgs[1]    # Detected cat head roi. 
-    croproi = imgs[2]    # Cropped/extended roi.
-    
-    globalthr = imgs[3]    # Global threshold (inverted).
-    adpthr = imgs[4]    # Adaptive threshold (inverted).
-    combthr = imgs[5]    # Combined threshold.
-    opened = imgs[6]    # Opened image.
-    
-    dilated = imgs[7]    # Dilated image.
-    combined = imgs[8]    # Combined image (re-inverted).
-    
-    contours = imgs[9]    # Contours of white areas.
-    final = imgs[10]    # Final image.
-    
     # TODO: Enable creating these based on input instead.
     kernel3x3 = create_kernel(w=3, h=3)
     kernel2x2 = create_kernel(w=2, h=2)
     kernel5x1 = create_kernel(w=5, h=1)
 
-    x_start = 20
-
-    img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
-
-    if description:
-        desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-        text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
-        img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
-
-    height = 120
-
-    # Original.
-    img.composite(orgimg, left=mpos(orgimg.width), top=height) 
-    height += orgimg.height + gap
-    
-    # Detected head + cropped region of interest.
-    head_row = create_row([detected, croproi], [0, 0], horizontal_gap, caption="Detected head  Cropped ROI")
-    img.composite(head_row, left=mpos(head_row.width), top=height)
-    height += head_row.height + gap
-
     # TODO: simplify the code below by making the symbols into images before they're used to create the rows.
 
-    # Combine the threshold images.
-    thr_row = create_row([globalthr, "+", adpthr, "=", combthr],
-                        [x_start,
-                        (4 * horizontal_gap, -15, 14 * horizontal_gap, font),
-                        0,
-                        (2 * horizontal_gap, -15, 8 * horizontal_gap, font),
-                        2 * horizontal_gap],
-                        horizontal_gap, fixed_width=img.width,
-                        caption="Global Threshold           Adaptive Threshold       Combined Threshold",
-                        caption_offset=(x_start, 0))
-    img.composite(thr_row, left=mpos(thr_row.width), top=height)
-    height += thr_row.height + gap
+    if len(img_paths) >= 3:
+        detected = imgs[1]    # Detected cat head roi. 
+        croproi = imgs[2]    # Cropped/extended roi.
+        height += orgimg.height + gap
+        
+        # Detected head + cropped region of interest.
+        head_row = create_row([detected, croproi], [0, 0], horizontal_gap, caption="Detected head  Cropped ROI")
+        img.composite(head_row, left=mpos(head_row.width), top=height)
+    
+    if len(img_paths) >= 6:
+        globalthr = imgs[3]    # Global threshold (inverted).
+        adpthr = imgs[4]    # Adaptive threshold (inverted).
+        combthr = imgs[5]    # Combined threshold.
 
-    # Open the combined threshold.
-    open_row = create_row([combthr, u"∘", kernel2x2, "=", opened],
-                        [x_start,
-                        (5 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
-                        0,
-                        (21 * horizontal_gap, -15, 10 * horizontal_gap, font),
-                        19 * horizontal_gap + 3],
-                        horizontal_gap, fixed_width=img.width,
-                        caption="Combined Threshold         2x2 Kernel               Opened Image",
-                        caption_offset=(x_start, 0))
-    img.composite(open_row, left=mpos(open_row.width), top=height)
-    height += open_row.height + gap
+        height += head_row.height + gap
+        # Combine the threshold images.
+        thr_row = create_row([globalthr, "+", adpthr, "=", combthr],
+                            [x_start,
+                            (4 * horizontal_gap, -15, 14 * horizontal_gap, font),
+                            0,
+                            (2 * horizontal_gap, -15, 8 * horizontal_gap, font),
+                            2 * horizontal_gap],
+                            horizontal_gap, fixed_width=img.width,
+                            caption="Global Threshold           Adaptive Threshold       Combined Threshold",
+                            caption_offset=(x_start, 0))
+        img.composite(thr_row, left=mpos(thr_row.width), top=height)
 
-    # Dilate opened and combined threshold with a kernel3x3.
-    dilated_row = create_row([opened, u"⊕", kernel3x3, "=", dilated],
-                        [x_start,
-                        (3 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
-                        0,
-                        (17 * horizontal_gap, -15, 10 * horizontal_gap, font),
-                        15 * horizontal_gap + 3],
-                        horizontal_gap, fixed_width=img.width,
-                        caption="Opened Image               3x3 Kernel               Dilated Image",
-                        caption_offset=(x_start, 0))
-    img.composite(dilated_row, left=mpos(dilated_row.width), top=height)
-    height += dilated_row.height + gap
+    if len(img_paths) >= 7:
+        opened = imgs[6]    # Opened image.
+    
+        height += thr_row.height + gap
 
-    # Inverted image and contour.
-    contour_row = create_row([combined, contours], [0, 0], horizontal_gap, caption="  Re-Inverted         Contours")
-    img.composite(contour_row, left=mpos(contour_row.width), top=height)
-    height += contour_row.height + 2 * gap
+        # Open the combined threshold.
+        open_row = create_row([combthr, u"∘", kernel2x2, "=", opened],
+                            [x_start,
+                            (5 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
+                            0,
+                            (21 * horizontal_gap, -15, 10 * horizontal_gap, font),
+                            19 * horizontal_gap + 3],
+                            horizontal_gap, fixed_width=img.width,
+                            caption="Combined Threshold         2x2 Kernel               Opened Image",
+                            caption_offset=(x_start, 0))
+        img.composite(open_row, left=mpos(open_row.width), top=height)
 
-    # Final.
-    img.composite(final, left=mpos(final.width), top=height)
-    height += final.height + gap
+    if len(img_paths) >= 8:
+        dilated = imgs[7]    # Dilated image.
+
+        height += open_row.height + gap
+
+        # Dilate opened and combined threshold with a kernel3x3.
+        dilated_row = create_row([opened, u"⊕", kernel3x3, "=", dilated],
+                            [x_start,
+                            (3 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
+                            0,
+                            (17 * horizontal_gap, -15, 10 * horizontal_gap, font),
+                            15 * horizontal_gap + 3],
+                            horizontal_gap, fixed_width=img.width,
+                            caption="Opened Image               3x3 Kernel               Dilated Image",
+                            caption_offset=(x_start, 0))
+        img.composite(dilated_row, left=mpos(dilated_row.width), top=height)
+
+    if len(img_paths) >= 10:
+
+        combined = imgs[8]    # Combined image (re-inverted).
+        contours = imgs[9]    # Contours of white areas.
+
+        height += dilated_row.height + gap
+
+        # Inverted image and contour.
+        contour_row = create_row([combined, contours], [0, 0], horizontal_gap, caption="  Re-Inverted         Contours")
+        img.composite(contour_row, left=mpos(contour_row.width), top=height)
+
+    if len(img_paths) >= 11:        
+        final = imgs[10]    # Final image.
+        height += contour_row.height + 2 * gap
+
+        # Final.
+        img.composite(final, left=mpos(final.width), top=height)
+        height += final.height + gap
 
     return img
 
