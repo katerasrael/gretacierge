@@ -134,6 +134,8 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     if description:
         desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
         text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
+        log("text_width %d" % text_width)
+        log("left  %d" % ((img.width - text_width) / 2))
         img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
         height = 120
 
