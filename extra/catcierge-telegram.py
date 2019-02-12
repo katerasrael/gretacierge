@@ -267,7 +267,7 @@ def create_matches(catcierge_json, output_file, args):
         img = compose_img(img_paths=img_paths,
                 gap=5,
                 description=match["description"],
-                caption="Match %d" % i, state=catcierge_json["state"], direction=catcierge_json["match_group_d"])
+                caption="Match %d" % i, state=catcierge_json["state"], direction=catcierge_json["match_group_direction"])
 
         total_width += img.width
         total_height = max(total_height, img.height)
