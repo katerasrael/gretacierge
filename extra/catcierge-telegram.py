@@ -125,24 +125,23 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     mpos = lambda w: (img.width - w) / 2
     x_start = 20
 
+    # first we show the "Match %d"
+    text_width = (font_title.size) * int((len(caption)) * 0.7)   # get width - TODO why 0.7?
+    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
+
+    # the we show the direction and description
+    # TODO 
+    if description:
+        desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
+        text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
+        img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
+        height = 120
+
+    # show original image
     if len(img_paths) >= 1:
         orgimg = imgs[0]    # Original image.
-        img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
-    
-        if description:
-            desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-            text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
-            img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
-    
-        height = 120
-    
-        # Original.
         img.composite(orgimg, left=mpos(orgimg.width), top=height) 
     
-#        img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
-#        img.composite(imgs[0], left=mpos(imgs[0].width), top=120)
-#        return img
-
     # TODO: Enable creating these based on input instead.
     kernel3x3 = create_kernel(w=3, h=3)
     kernel2x2 = create_kernel(w=2, h=2)
@@ -183,7 +182,8 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         height += thr_row.height + gap
 
         # Open the combined threshold.
-        open_row = create_row([combthr, u"∘", kernel2x2, "=", opened],
+        # utf-8 circle u'∘'    0x25CB 
+        open_row = create_row([combthr, '\u25CB', kernel2x2, "=", opened],
                             [x_start,
                             (5 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
                             0,
@@ -200,7 +200,8 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         height += open_row.height + gap
 
         # Dilate opened and combined threshold with a kernel3x3.
-        dilated_row = create_row([opened, u"⊕", kernel3x3, "=", dilated],
+        # utf  plus in a circle    u'⊕'        0x2295
+        dilated_row = create_row([opened, '\u2295', kernel3x3, "=", dilated],
                             [x_start,
                             (3 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
                             0,
