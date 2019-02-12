@@ -89,12 +89,16 @@ def create_row(imgs, offsets, gap, fixed_width=0, caption=None, caption_offset=(
 
 def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, description=None, caption="Catcierge", state="undefined", direction="undefined"):
 
-    if state == "Lockout":
-        background_color =  "#ff0000"   #red
-    elif state == "Keep open":
-        background_color =  "#ADFF2F"   #green
+    if direction == "In":
+        if state == "Lockout":
+            background_color =  "#ff0000"   #red
+        elif state == "Keep open":
+            background_color =  "#ADFF2F"   #green
+        else:
+            background_color =  "#8A968E"   #original grey
     else:
         background_color =  "#8A968E"   #original grey
+
 
     img = Image(width=600, height=1124, background=Color(background_color))
         
@@ -129,17 +133,34 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     # first we show the "Match %d"
     text_width = font_title.size * int((len(caption)) * 0.7)   # get width - TODO why 0.7?
     img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
+#    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
 
     # the we show the direction and description
     # TODO 
     if description:
         desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-        font_width = int(desc_font.size * 0.7)
+<<<<<<< master
+<<<<<<< master
+        font_width = int(desc_font.size * 0.8)
         
         if description == "Skipped prey detection when going out":
             text = direction + ' - Skipped prey detection' # https://stackoverflow.com/questions/2872512/python-truncate-a-long-string#
+=======
+        font_width = int(desc_font.size * 0.7)
+
+        text_t = direction + ' - ' + description # add some information about direction
+        if len(text_t) > 33:
+            text = text_t[:33] + (text_t[:33] and '..') # https://stackoverflow.com/questions/2872512/python-truncate-a-long-string#
+>>>>>>> 73cc01f fix
+=======
+        font_width = int(desc_font.size * 0.7)
+
+        text_t = direction + ' - ' + description # add some information about direction
+        if len(text_t) > 33:
+            text = text_t[:33] + (text_t[:33] and '..') # https://stackoverflow.com/questions/2872512/python-truncate-a-long-string#
+>>>>>>> 73cc01f fix
         else:
-            text = direction + ' - ' + description
+            text = text_t
             
         text_width = font_width * len(text)
         img.caption(text, left=((img.width - text_width) / 2), top=80, width=text_width, height=100, font=desc_font)
@@ -263,7 +284,7 @@ def create_matches(catcierge_json, output_file, args):
         img = compose_img(img_paths=img_paths,
                 gap=5,
                 description=match["description"],
-                caption="Match %d" % i, state=catcierge_json["state"], direction=match["direction"])
+                caption="Match %d" % i, state=catcierge_json["state"], direction=catcierge_json["match_group_direction"])
 
         total_width += img.width
         total_height = max(total_height, img.height)
