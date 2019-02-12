@@ -14,6 +14,7 @@ import telegram
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from pip._vendor.cachecontrol.compat import text_type
 
 kernel_size = 20
 args = None
@@ -126,18 +127,23 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     x_start = 20
 
     # first we show the "Match %d"
-    text_width = (font_title.size / 2) * int((len(caption))) # * 0.7)   # get width - TODO why 0.7?
-    img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
+    text_width = font_title.size * int((len(caption)) * 0.7)   # get width - TODO why 0.7?
+    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
 #    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
 
     # the we show the direction and description
     # TODO 
     if description:
         desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-        font_width = desc_font.size / 2
-        text = direction + ' - ' + description # add some information about direction
-#       text = text_t[:40] + (text_t[:40] and '..') # https://stackoverflow.com/questions/2872512/python-truncate-a-long-string#
-        text_width = font_width * int(len(text)) # * 0.7)
+        font_width = int(desc_font.size * 0.7)
+
+        text_t = direction + ' - ' + description # add some information about direction
+        if len(text_t) > 40:
+            text = text_t[:40] + (text_t[:40] and '..') # https://stackoverflow.com/questions/2872512/python-truncate-a-long-string#
+        else:
+            text = text_t
+            
+        text_width = font_width * len(text)
         img.caption(text, left=((img.width - text_width) / 2), top=80, width=text_width, height=100, font=desc_font)
         height = 120
 
