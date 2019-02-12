@@ -189,7 +189,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         kernel2x2 = create_kernel(w=2, h=2)
 
         # Open the combined threshold.
-        # utf-8 circle u'∘'    0x25CB 
+        # utf-8 Overlay u'∘'    0x20D8
         open_row = create_row([combthr, u'\u20D8', kernel2x2, "=", opened],
                             [x_start,
                             (5 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
