@@ -101,8 +101,8 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     #print("Font path: %s" % args.fonts)
 
     font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=64)
-#    font_title = Font(path="%s/alex-brush/AlexBrush-Regular.ttf" % args.fonts, size=64)
-    font_title = font
+    font_title = Font(path="%s/alex-brush/AlexBrush-Regular.ttf" % args.fonts, size=64)
+#    font_title = font
     font_math = Font(path="%s/Asana-Math/Asana-Math.otf" % args.fonts, size=64)
 
 
@@ -190,7 +190,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
 
         # Open the combined threshold.
         # utf-8 circle u'∘'    0x25CB 
-        open_row = create_row([combthr, u'\u00B0', kernel2x2, "=", opened],
+        open_row = create_row([combthr, u'\u20D8', kernel2x2, "=", opened],
                             [x_start,
                             (5 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
                             0,
