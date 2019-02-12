@@ -100,8 +100,8 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     #print("Font path: %s" % args.fonts)
 
     font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=64)
-#    font_title = Font(path="%s/alex-brush/AlexBrush-Regular.ttf" % args.fonts, size=64)
-    font_title = font
+    font_title = Font(path="%s/alex-brush/AlexBrush-Regular.ttf" % args.fonts, size=64)
+#    font_title = font
     font_math = Font(path="%s/Asana-Math/Asana-Math.otf" % args.fonts, size=64)
 
 
@@ -126,17 +126,19 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     x_start = 20
 
     # first we show the "Match %d"
-    text_width = (font_title.size) * int((len(caption)) * 0.7)   # get width - TODO why 0.7?
-    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
+    text_width = (font_title.size / 2) * int((len(caption))) # * 0.7)   # get width - TODO why 0.7?
+    img.caption(caption, left=(img.width - 250) / 2, top=5, width=250, height=100, font=font_title)
+#    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
 
     # the we show the direction and description
     # TODO 
     if description:
         desc_font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=24)
-        text_width = (desc_font.size) * int((len(direction) + 3 + len(description)) * 0.7) # add some information about direction
-        log("text_width %d" % text_width)
-        log("left  %d" % ((img.width - text_width) / 2))
-        img.caption(direction + ' - ' + description, left=(img.width - text_width) / 2, top=80, width=text_width, height=100, font=desc_font)
+        font_width = desc_font.size / 2
+        text = direction + ' - ' + description # add some information about direction
+#       text = text_t[:40] + (text_t[:40] and '..') # https://stackoverflow.com/questions/2872512/python-truncate-a-long-string#
+        text_width = font_width * int(len(text)) # * 0.7)
+        img.caption(text, left=((img.width - text_width) / 2), top=80, width=text_width, height=100, font=desc_font)
         height = 120
 
     # show original image
@@ -144,13 +146,9 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         orgimg = imgs[0]    # Original image.
         img.composite(orgimg, left=mpos(orgimg.width), top=height) 
     
-    # TODO: Enable creating these based on input instead.
-    kernel3x3 = create_kernel(w=3, h=3)
-    kernel2x2 = create_kernel(w=2, h=2)
-    kernel5x1 = create_kernel(w=5, h=1)
+#    kernel5x1 = create_kernel(w=5, h=1) - won't need that
 
     # TODO: simplify the code below by making the symbols into images before they're used to create the rows.
-
     if len(img_paths) >= 3:
         detected = imgs[1]    # Detected cat head roi. 
         croproi = imgs[2]    # Cropped/extended roi.
@@ -182,10 +180,11 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         opened = imgs[6]    # Opened image.
     
         height += thr_row.height + gap
+        kernel2x2 = create_kernel(w=2, h=2)
 
         # Open the combined threshold.
         # utf-8 circle u'∘'    0x25CB 
-        open_row = create_row([combthr, '\u25CB', kernel2x2, "=", opened],
+        open_row = create_row([combthr, u'\u25CB', kernel2x2, "=", opened],
                             [x_start,
                             (5 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
                             0,
@@ -200,10 +199,11 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         dilated = imgs[7]    # Dilated image.
 
         height += open_row.height + gap
+        kernel3x3 = create_kernel(w=3, h=3)
 
         # Dilate opened and combined threshold with a kernel3x3.
         # utf  plus in a circle    u'⊕'        0x2295
-        dilated_row = create_row([opened, '\u2295', kernel3x3, "=", dilated],
+        dilated_row = create_row([opened, u'\u2295', kernel3x3, "=", dilated],
                             [x_start,
                             (3 * horizontal_gap, -5, 14 * horizontal_gap, font_math),
                             0,
@@ -215,7 +215,6 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         img.composite(dilated_row, left=mpos(dilated_row.width), top=height)
 
     if len(img_paths) >= 10:
-
         combined = imgs[8]    # Combined image (re-inverted).
         contours = imgs[9]    # Contours of white areas.
 
