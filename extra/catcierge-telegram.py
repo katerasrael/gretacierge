@@ -252,11 +252,11 @@ def create_matches(catcierge_json, output_file, args):
 
         step_count = match["step_count"]
         img_paths = []
-        log("Stepcount %d" % step_count)
+#        log("Stepcount %d" % step_count)
         
         for step in match["steps"][:step_count]:
             img_paths.append(os.path.join(base_path, step["path"]))
-            log(" %s" % step["path"])
+#            log(" %s" % step["path"])
 
 
         img = compose_img(img_paths=img_paths,
