@@ -1,0 +1,191 @@
+Reading Raspberry Pi camera config: /etc/catcierge/catcierge-rpi.cfg
+Found arguments: -rotation 90 
+Usage: catcierge_grabber [--help] [--config CONFIG] [--config_rpi CONFIG_RPI] [--no_default_config] [--chuid CHUID] [--base_time BASE_TIME]
+                         [--camhelp] [--non_rpi_cam] [--camera_index CAMERA_INDEX] [--startup_delay STARTUP_DELAY] [--auto_roi_thr THRESHOLD]
+                         [--min_backlight MIN_BACKLIGHT] [--save_auto_roi] [--ok_matches_needed OK_MATCHES_NEEDED] [--no_final_decision]
+                         [--matchtime MATCHTIME] [--cascade CASCADE] [--in_direction LEFT|RIGHT] [--min_size MIN_SIZE] [--no_match_is_fail]
+                         [--equalize_histogram] [--prey_steps 1|2] [--prey_method ADAPTIVE|NORMAL] [--snout SNOUT [SNOUT ...]]
+                         [--threshold THRESHOLD] [--match_flipped] [--lockout_method LOCKOUT_METHOD] [--lockout LOCKOUT]
+                         [--no_unlock_after_lockout NO_UNLOCK_AFTER_LOC] [--lockout_error LOCKOUT_ERROR] [--lockout_error_delay LOCKOUT_ERROR_DELAY]
+                         [--lockout_dummy] [--lockout_gpio_pin GPIO] [--backlight_gpio_pin GPIO] [--backlight_enable] [--show] [--highlight]
+                         [--nocolor] [--noanim] [--eventhelp] [--save] [--save_obstruct] [--save_steps] [--input INPUT [INPUT ...]]
+                         [--output_path PATH] [--match_output_path PATH] [--steps_output_path PATH] [--obstruct_output_path PATH]
+                         [--template_output_path PATH] [--cmdhelp] [--match_group_done_cmd CMD [CMD ...]] [--state_change_cmd CMD [CMD ...]]
+                         [--do_lockout_cmd CMD [CMD ...]] [--do_unlock_cmd CMD [CMD ...]] [--save_img_cmd CMD [CMD ...]]
+                         [--match_done_cmd CMD [CMD ...]] [--frame_obstructed_cmd CMD [CMD ...]] [--uservar USERVAR [USERVAR ...]]
+                         [--sigusr1 SIGUSR1] [--sigusr2 SIGUSR2]
+                         [--roi X Y WIDTH HEIGHT, --auto_roi] {--template_matcher, --haar_matcher}
+
+Catcierge saves you from cleaning the floor!
+
+
+Options:
+    -h, --help                               Show this help
+    -c, --config CONFIG                      Path to the catcierge config file. Catcierge looks for /etc/catcierge/catcierge.cfg by default, unless
+                                             --no_default_config has been specified. Setting this overrides the default config.
+                                             NOTE: Options for the raspberry pi camera settings --rpi, cannot be used in this config. Please see
+                                             --config_rpi and --camhelp for details.
+    --config_rpi CONFIG_RPI                  Path to config file for raspberry pi camera settings. See --camhelp for details. Default location:
+                                             /etc/catcierge/catcierge-rpi.cfg
+    --no_default_config                      Do not load the default config (/etc/catcierge/catcierge.cfg) if none is specified using --config
+    --chuid CHUID                            Run the process under this user when dropping root privileges which are needed for setting GPIO pins on
+                                             the Raspberry Pi.
+    --base_time BASE_TIME                    The base date time we should use instead of the current time. Only meant to be used when testing the code
+                                             to have a repeatable time for replaying events.
+    --camhelp                                Show extra raspberry pi camera help
+    --non_rpi_cam                            Don't attempt to use the onboard RPI camera. Instead let OpenCV search for the camera. Use this if you
+                                             want to use a USB webcam instead. (On other platforms than Raspberry Pi this is default)
+    --camera_index CAMERA_INDEX              Zero-based index of the camera to use. Default value is 0.
+                                             (Note that this setting does nothing when using the built-in Raspberry Pi camera).
+
+Region Of Interest (ROI) settings:
+  If the backlight does not take up the entire camera image, these settings can be used to set what part of the image that the matcher should look for
+  the cat head in. The region of interest (ROI).
+
+    --startup_delay STARTUP_DELAY            Number of seconds to wait after starting before starting to capture anything. This is so that if you have
+                                             a back light that is turned on at startup, it has time to turn on, otherwise the program will think
+                                             something is obstructing the image and start trying to match.
+    --roi X Y WIDTH HEIGHT                   Crop all input image to this region of interest. Cannot be used together with --auto_roi.
+    --auto_roi                               Automatically crop to the area covered by the backlight. This will be done after --startup_delay has
+                                             ended. Cannot be used together with --roi.
+    --auto_roi_thr THRESHOLD                 Set the threshold values used to find the backlight, using a binary threshold algorithm. Separate each
+                                             pixel into either black or white. White if the greyscale value of the pixel is above the threshold, and
+                                             black otherwise.
+                                             Default value 90
+    --min_backlight MIN_BACKLIGHT            If --auto_roi is on, this sets the minimum allowed area the backlight is allowed to be before it is
+                                             considered broken. If it is smaller than this, the program will exit. Default 10000.
+    --save_auto_roi                          Save the image roi found by --auto_roi. Can be useful for debugging when tweaking the threshold. Result
+                                             placed in --output_path.
+
+Matcher settings:
+    --templ, --template, --template_matcher  Template based matching algorithm.
+    --haar, --haar_matcher                   Haar feature based matching algorithm (recommended).
+    --ok_matches_needed OK_MATCHES_NEEDED    The number of matches out of 4 matches that need to be OK for the match to be considered an over all OK
+                                             match.
+    --no_final_decision                      Normally after all matches in a match group has been made the matcher algorithm gets to do a final
+                                             decision based on the entire group of matches which overrides the "--ok_matches_needed"setting. This flag
+                                             turns this behavior off.
+    --matchtime MATCHTIME                    The time to wait after a match before attemping again. Default 0 seconds.
+
+Haar cascade matcher settings:
+  Settings for when --haar_matcher is used.
+  This is the recommended matcher type.
+
+    --cascade CASCADE                        Path to the haar cascade xml generated by opencv_traincascade.
+    --in_direction LEFT|RIGHT                The direction which is considered going inside.
+    --min_size MIN_SIZE                      The size of the minimum sized box that fits the matched cat head.
+    --no_match_is_fail                       If no cat head is found in the picture, consider this a failure. The default is to only consider found
+                                             prey a failure.
+    --eqhist, --equalize_histogram           Equalize the histogram of the image before doing. the haar cascade detection step.
+    --prey_steps 1|2                         Only applicable for normal prey mode. 2 means a secondary search should be made if no prey is found
+                                             initially.
+    --prey_method ADAPTIVE|NORMAL            Sets the prey matching method. Adaptive combines the result of both a global and adaptive thresholding to
+                                             be better able to find prey parts otherwise blended into the background. Normal is simpler and doesn't
+                                             catch such corner cases as well.
+
+Template matcher settings:
+  Settings for when --template_matcher is used.
+  Note that it is recommended you use the --haar_matcher instead.
+
+    --snout SNOUT [SNOUT ...]                Path to the snout images to use. If more than one path is given, the average match result is used.
+    --threshold THRESHOLD                    Match threshold as a value between 0.0 and 1.0. Default 0.8
+    --match_flipped                          Match a flipped version of the snout (don't consider going out a failed match). Default on.
+
+Lockout settings:
+  These settings control how the cat door will be locked.
+
+    --lockout_method LOCKOUT_METHOD          Defines the method used to decide when to unlock:
+                                             [1: Only use the timer, don't care about clear frame.]
+                                             2: Wait for clear frame or that the timer has timed out.
+                                             3: Wait for clear frame and then start unlock timer.
+    --lockout LOCKOUT                        The time in seconds a lockout takes. Default 30 seconds.
+    --no_unlock_after_lockout NO_UNLOCK_AFTER_LOC
+                                             The default behavior is that the cat door is always open, and when a prey is detected, the door is locked
+                                             for a set time (set by --lockout), and then unlocked.
+                                             However this is a problem if you are overriding the normal lockout mechanism for example if you want to
+                                             reverse that behavior, so that the cat door is normally closed and only opens if the cat has no prey.
+                                             Use this option so if a prey is detected, we never unlock. Not until a good match has been made again.
+    --lockout_error LOCKOUT_ERROR            Number of lockouts in a row that's allowed before we consider it an error and quit the program. Default is
+                                             to never do this.
+    --lockout_error_delay LOCKOUT_ERROR_DELAY
+                                             The delay in seconds between lockouts that should be counted as a consecutive lockout. Default 3.0.
+    --lockout_dummy                          Do everything as normal, but don't actually lock the door. This is useful for testing.
+
+Raspberry Pi GPIO settings:
+  Settings for changing the GPIO pins used on the Raspberry Pi.
+  Note that if you change these, you will need to set the same pin in the init script so the pin gets the correct state at boot. For permanently
+  changing this, it's instead recommended that you change the default pin when compiling.
+
+    --lockout_gpio_pin GPIO                  Change the Raspberry Pi GPIO pin used for triggering the lockout of the cat door.
+                                             The default GPIO pin used: 4
+    --backlight_gpio_pin GPIO                Change the Raspberry Pi GPIO pin used for turning on the backlight (if backlight control is enabled --backlight_enable).
+                                             The default GPIO pin used: 18
+    --backlight_enable                       Control the backlight via a GPIO pin? This will then always turn it on at startup. If you instead have the
+                                             backlight wired to always be on, this is not needed.
+
+Presentation settings:
+    --show                                   Show GUI of the camera feed (X11 only).
+    --highlight                              Highlight the best match on saved images. (Only ever use for debugging purposes, since it writes on the
+                                             original image)
+    --nocolor                                Turn off all color output in the console.
+    --noanim                                 Turn off animations in the console.
+
+Output settings:
+  Note that all the *_path variables below can contain variables of the format %var%.
+  See --cmdhelp for available variables, and --eventhelp for a list of events.
+
+    --eventhelp                              Show a list of the events that are triggered by catcierge. Templates specified using --input can filter
+                                             based on these so that they generate output only for a specific event. This also shows general help
+                                             regarding input template settings.
+    --save                                   Save match images (both ok and failed).
+    --save_obstruct                          Save the image that triggered the "frame obstructed" event.
+    --save_steps                             Save each step of the matching algorithm. (--save must also be turned on)
+    --input INPUT [INPUT ...]                Path to one or more template files generated on specified events. (Not to be confused with the template
+                                             matcher). See --eventhelp for details on generating these on specific events as well as input template
+                                             settings.
+    --output, --output_path PATH             Path to where the match images and generated templates should be saved.
+    --match_output_path PATH                 Override --output_path for match images and save them here instead. This can be relative to --output_path
+                                             by using %%output_path%% in the path. Note that this applies to all paths, other path variables can be
+                                             used to create a nested structure. Just make sure you do not add a recursive dependence. Also any other
+                                             %%vars%% can of course be used to build the path. See --cmdhelp for details.
+    --steps_output_path PATH                 If --save_steps is enabled, save step images to this path. Same as for --match_output_path, overrides --output_path.
+                                             Example: --steps_output_path %%match_output_path%%/steps
+    --obstruct_output_path PATH              Path for the obstruct images. Overrides --output_path.
+    --template_output_path PATH              Output path for templates (given by --template). Overrides --output_path.
+
+Command settings:
+  These are commands that will be executed when certain events occur.
+  Variables can be passed to these commands such as:
+    %state%, %match_success% and so on.
+  To see a list of variables use --cmdhelp
+
+    --cmdhelp                                Shows command output variable help.
+    --match_group_done_cmd CMD [CMD ...]     Command to run when the match_group_done event is triggered. Event when all steps for match group has been
+                                             successfully performed. This is most likely what you want to trigger most stuff on.
+    --state_change_cmd CMD [CMD ...]         Command to run when the state_change event is triggered. State machine state changed.
+    --do_lockout_cmd CMD [CMD ...]           Command to run when the do_lockout event is triggered. Triggered right before a lockout is performed.
+    --do_unlock_cmd CMD [CMD ...]            Command to run when the do_unlock event is triggered. Triggered right before a unlock is performed.
+    --save_img_cmd CMD [CMD ...]             Command to run when the save_img event is triggered. Event after all images for a match group have been
+                                             saved to disk.
+    --match_done_cmd CMD [CMD ...]           Command to run when the match_done event is triggered. Triggered after each match in a match group.
+    --frame_obstructed_cmd CMD [CMD ...]     Command to run when the frame_obstructed event is triggered. Right after the camera view has been
+                                             obstructed and the obstruct image has been saved.
+    -u, --uservar USERVAR [USERVAR ...]      Adds a user defined variable that can then be used when generating templates or executing custom commands.
+                                             This is useful when passing passwords or similar, so those don't have to be defined in the script but
+                                             when catcierge is started instead. And can then also be used in multiple places.
+
+Signal settings:
+  The program can receive signals that can be sent using the kill command.
+    SIGUSR1
+    SIGUSR2
+  These settings can be used to customize what happens when catcierge receives these signals.
+  Available behaviors:
+    none = Nothing is peformed
+    lock = Lock the cat door for lockout time
+    unlock = Unlock the cat door
+    ignore = Ignores any events, until 'attention'
+    attention = Stops ignoring events
+
+    --sigusr1 SIGUSR1                        Set the behavior when the SIGUSR1 signal is received.
+    --sigusr2 SIGUSR2                        Set the behavior when the SIGUSR2 signal is received.
+
