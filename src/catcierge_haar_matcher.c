@@ -150,11 +150,14 @@ match_direction_t catcierge_haar_guess_direction(catcierge_haar_matcher_t *ctx, 
 	assert(ctx->args);
 
 	// Left.
-	cvSetImageROI(thr_img, cvRect(0, 0, 1, roi.height));
+//	cvSetImageROI(thr_img, cvRect(0, 0, 1, roi.height));
+	// can't get it: why is there a '1' for width?
+	cvSetImageROI(thr_img, cvRect(0, 0, roi.width, roi.height));
 	left_sum = (int)cvSum(thr_img).val[0];
 
 	// Right.
-	cvSetImageROI(thr_img, cvRect(roi.width - 1, 0, 1, roi.height));
+	// same here...
+	cvSetImageROI(thr_img, cvRect(roi.width - 1, 0, roi.width, roi.height));
 	right_sum = (int)cvSum(thr_img).val[0];
 
 	if (abs(left_sum - right_sum) > 25)

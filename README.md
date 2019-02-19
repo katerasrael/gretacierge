@@ -72,7 +72,7 @@ Catcierge uses the CMake build system. To compile:
 First, to install OpenCV on raspbian:
 
 ```bash
-$ sudo apt-get install cmake opencv-dev build-essential
+$ sudo apt-get install cmake libopencv-dev build-essential
 ```
 
 Then to build:
@@ -80,7 +80,7 @@ Then to build:
 ```bash
 $ git clone https://github.com/katerasrael/gretacierge.git
 $ cd gretacierge
-### $ git submodule update --init # For the rpi userland sources.
+$ git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
 $ mkdir build && cd build
 $ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF  # Raspbian has no CZMQ package.
