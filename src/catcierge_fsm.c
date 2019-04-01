@@ -1046,7 +1046,13 @@ static match_direction_t catcierge_guess_overall_direction(catcierge_grb_t *grb)
 	{
 		// Get any successful direction.
 		// (It is very uncommon for 2 successful matches to give different
-		// direction with the template matcher, so we can be pretty sure
+
+		if (grb->args.matcher_type == MATCHER_TEMPLATE)
+		{
+			// Get any successful direction.
+			// (It is very uncommon for 2 successful matches to give different
+			// direction with the template matcher, so we can be pretty sure
+	// direction with the template matcher, so we can be pretty sure
 		// this is correct).
 		for (i = 0; i < MATCH_MAX_COUNT; i++)
 		{
@@ -1072,6 +1078,9 @@ static match_direction_t catcierge_guess_overall_direction(catcierge_grb_t *grb)
 				case MATCH_DIR_UNKNOWN: unknown_count++; break;
 			}
 		}
+		fprintf(stderr, "in_count: %d\n", in_count);
+		fprintf(stderr, "out_count: %d\n", out_count);
+		fprintf(stderr, "unknown_count: %d\n", unknown_count);
 
 		if ((in_count > out_count) && (in_count > unknown_count))
 		{
