@@ -408,6 +408,8 @@ int catcierge_haar_matcher_find_prey(catcierge_haar_matcher_t *ctx,
 
 void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect *roi)
 {
+	int delta = 15;
+
 	// Limit the roi to the lower part where the prey might be.
 	// (This gets rid of some false positives)
 	roi->height /= 2;
@@ -416,11 +418,12 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 	// Extend the rect a bit towards the outside.
 	// This way for big mice and such we still get some white on each side of it.
 	// TODO: Make this a commandline argument.
-	roi->width += 30;
+	roi->width += delta;
 
-	printf("Direction Arg: %d\n", ctx->args->in_direction);
+	if (ctx->super.debug && (ctx->args->in_direction == DIR_LEFT)) printf("  Left direction, move ROI left\n");
+	if (ctx->super.debug && (ctx->args->in_direction == DIR_RIGHT)) printf("  Right direction, move ROI right\n");
 
-	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -30 : 30); // TODO
+	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -delta : delta);
 	if (roi->x < 0) roi->x = 0;
 }
 
@@ -664,12 +667,10 @@ static int parse_in_direction(cargo_t ctx, void *user, const char *optname,
 
 	if (!strcasecmp(d, "left"))
 	{
-		printf("Direction Arg: left\n");
 		*in_dir = DIR_LEFT;
 	}
 	else if (!strcasecmp(d, "right"))
 	{
-		printf("Direction Arg: right\n");
 		*in_dir = DIR_RIGHT;
 	}
 	else
