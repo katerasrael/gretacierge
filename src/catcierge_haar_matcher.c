@@ -664,12 +664,12 @@ static int parse_in_direction(cargo_t ctx, void *user, const char *optname,
 
 	if (!strcasecmp(d, "left"))
 	{
-		if (ctx->super.debug) printf("Direction Arg: left\n");
+		printf("Direction Arg: left\n");
 		*in_dir = DIR_LEFT;
 	}
 	else if (!strcasecmp(d, "right"))
 	{
-		if (ctx->super.debug) printf("Direction Arg: right\n");
+		printf("Direction Arg: right\n");
 		*in_dir = DIR_RIGHT;
 	}
 	else
