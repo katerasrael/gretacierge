@@ -456,6 +456,76 @@ int catcierge_drop_root_privileges(const char *user)
 }
 
 #ifdef RPI
+#ifdef GPIO_NEW
+int catcierge_setup_gpio(catcierge_grb_t *grb)
+{
+	catcierge_args_t *args = &grb->args;
+	int ret = 0;
+
+	if (args->do_lockout_cmd)
+	{
+		CATLOG("Skipping GPIO setup since a custom lockout command is set:");
+		CATLOG("  %s", args->do_lockout_cmd);
+		return 0;
+	}
+
+	if (gpioInitialise() < 0)
+	{
+		CATERR("Failed to initialize GPIO-Library\n");
+		ret = -1; goto fail;
+	}
+	else
+	{
+		// Set export for pins.
+		if (gpio_export(CATCIERGE_LOCKOUT_GPIO)
+		 || gpio_set_direction(CATCIERGE_LOCKOUT_GPIO, OUT))
+		{
+			CATERR("Failed to export and set direction for door pin\n");
+			ret = -1; goto fail;
+		}
+
+		// Start with the door open and light on.
+		gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
+
+		if (args->backlight_enable)
+		{
+			if (gpio_export(CATCIERGE_BACKLIGHT_GPIO)
+			 || gpio_set_direction(CATCIERGE_BACKLIGHT_GPIO, OUT))
+			{
+				CATERR("Failed to export and set direction for backlight pin\n");
+				ret = -1; goto fail;
+			}
+
+			gpio_write(CATCIERGE_BACKLIGHT_GPIO, 1);
+		}
+	}
+
+fail:
+	if (ret)
+	{
+		// Check if we're root.
+		if (getuid() != 0)
+		{
+			CATERR("###############################################\n");
+			CATERR("########## You have to run as root! ###########\n");
+			CATERR("###############################################\n");
+		}
+	}
+	else if (args->chuid && (getuid() == 0))
+	{
+		if (!catcierge_drop_root_privileges(args->chuid))
+		{
+			CATLOG("###############################################\n");
+			CATLOG("########## Root privileges dropped ############\n");
+			CATLOG("###############################################\n");
+		}
+	}
+
+	return ret;
+}
+
+#else //GPIO_NEW
+
 int catcierge_setup_gpio(catcierge_grb_t *grb)
 {
 	catcierge_args_t *args = &grb->args;
@@ -514,6 +584,7 @@ fail:
 
 	return ret;
 }
+#endif // GPIO_NEW
 #endif // RPI
 
 IplImage *catcierge_get_frame(catcierge_grb_t *grb)

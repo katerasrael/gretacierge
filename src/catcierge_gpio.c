@@ -19,6 +19,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef GPIO_NEW
+#include <pigpio.h>
+#endif // GPIO_NEW
+
 #include "catcierge_config.h"
 
 #ifdef CATCIERGE_HAVE_UNISTD_H
@@ -32,6 +36,47 @@
 #include <string.h>
 #include "catcierge_util.h"
 #include "catcierge_log.h"
+
+#ifdef GPIO_NEW
+int gpio_export(int pin)
+{
+	return 0;
+}
+
+int gpio_set_direction(int pin, int direction)
+{
+	int ret = 0;
+	int direction_t = 0;
+
+	direction_t = (direction == IN) ? PI_INPUT : PI_OUTPUT;
+
+	ret = gpioSetMode(pin, direction_t);
+
+	if (ret < 0)
+	{
+		CATERR("Failed gpioSetMode 4: %d (tried direction %s)\n", ret, (direction_t == PI_INPUT) ? "IN" : "OUT");
+		//ret = -2;
+	}
+
+	return ret;
+}
+
+int gpio_write(int pin, int val)
+{
+	int ret = 0;
+
+	ret = gpioWrite(pin, val);
+
+	if (ret < 0)
+	{
+		CATERR("Failed to open GPIO export for writing\n");
+		return -1;
+	}
+
+	return 0;
+}
+
+#else
 
 static int write_num_to_file(const char *path, int num)
 {
@@ -114,4 +159,4 @@ int gpio_write(int pin, int val)
 
 	return 0;
 }
-
+#endif

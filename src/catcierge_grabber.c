@@ -35,6 +35,10 @@
 #include <czmq.h>
 #endif
 
+#ifdef GPIO_NEW
+#include <pigpio.h>
+#endif // GPIO_NEW
+
 #include <opencv2/core/version.hpp>
 
 catcierge_grb_t grb;
@@ -190,8 +194,8 @@ int main(int argc, char **argv)
 	fprintf(stderr, "-tainted");
 	#endif
 
-	fprintf(stderr, ")\n(C) Joakim Soderberg 2013-2017\n\n");
-	fprintf(stderr, ")\n(C) Andreas Bär 2019\n\n");
+	fprintf(stderr, ")\n(C) Joakim Soderberg 2013-2017\n");
+	fprintf(stderr, "(C) Andreas Bär 2019\n\n");
 
 	fprintf(stderr, "Library versions:\n");
 	fprintf(stderr, " OpenCV v%d.%d.%d\n", CV_MAJOR_VERSION, CV_MINOR_VERSION, CV_SUBMINOR_VERSION);
@@ -329,6 +333,10 @@ int main(int argc, char **argv)
 	#endif
 	catcierge_grabber_destroy(&grb);
 	catcierge_args_destroy(&grb.args);
+
+	#ifdef GPIO_NEW
+	gpioTerminate();
+	#endif // GPIO_NEW
 
 	if (grb.log_file)
 	{

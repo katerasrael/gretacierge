@@ -1,19 +1,21 @@
-!/bin/sh
+#!/bin/sh
 
 echo 'Starting Catcierge GPIO ports setup' | systemd-cat -p info -t catcierge_rpi_gpio
 
 # Cat door
 echo 'Catcierge lockout pin GPIO@CATCIERGE_LOCKOUT_GPIO@' | systemd-cat -p info -t catcierge_rpi_gpio
-echo @CATCIERGE_LOCKOUT_GPIO@ > /sys/class/gpio/unexport
-echo @CATCIERGE_LOCKOUT_GPIO@ > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio@CATCIERGE_LOCKOUT_GPIO@/direction
-echo 0 > /sys/class/gpio/gpio@CATCIERGE_LOCKOUT_GPIO@/value
+/usr/bin/raspi-gpio set 4 op dl
+#echo @CATCIERGE_LOCKOUT_GPIO@ > /sys/class/gpio/unexport
+#echo @CATCIERGE_LOCKOUT_GPIO@ > /sys/class/gpio/export
+#echo out > /sys/class/gpio/gpio@CATCIERGE_LOCKOUT_GPIO@/direction
+#echo 0 > /sys/class/gpio/gpio@CATCIERGE_LOCKOUT_GPIO@/value
 
 # Backlight pin
 echo 'Catcierge backlight pin GPIO@CATCIERGE_BACKLIGHT_GPIO@' | systemd-cat -p info -t catcierge_rpi_gpio
-echo @CATCIERGE_BACKLIGHT_GPIO@ > /sys/class/gpio/unexport
-echo @CATCIERGE_BACKLIGHT_GPIO@ > /sys/class/gpio/export
-echo out > /sys/class/gpio/gpio@CATCIERGE_BACKLIGHT_GPIO@/direction
-echo 0 > /sys/class/gpio/gpio@CATCIERGE_BACKLIGHT_GPIO@/value
+/usr/bin/raspi-gpio set 4 op dl
+#echo @CATCIERGE_BACKLIGHT_GPIO@ > /sys/class/gpio/unexport
+#echo @CATCIERGE_BACKLIGHT_GPIO@ > /sys/class/gpio/export
+#echo out > /sys/class/gpio/gpio@CATCIERGE_BACKLIGHT_GPIO@/direction
+#echo 0 > /sys/class/gpio/gpio@CATCIERGE_BACKLIGHT_GPIO@/value
 
 echo 'Catcierge GPIO ports setup complete' | systemd-cat -p info -t catcierge_rpi_gpio

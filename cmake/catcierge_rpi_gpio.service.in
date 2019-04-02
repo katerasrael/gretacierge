@@ -3,12 +3,12 @@ Description=Set cat door to open on boot
 
 [Service]
 Type=oneshot
-ExecStart=@CMAKE_INSTALL_PREFIX@/share/catcierge/catcierge_rpi_gpio.sh
+ExecStart=/bin/bash @CMAKE_INSTALL_PREFIX@/share/catcierge/catcierge_rpi_gpio.sh
 StandardOutput=journal+console
 StandardError=journal+console
 #User=catcierge
 User=root
-Group=gpio
+Group=root
 
 [Install]
 WantedBy=multi-user.target
