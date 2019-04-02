@@ -150,19 +150,21 @@ match_direction_t catcierge_haar_guess_direction(catcierge_haar_matcher_t *ctx, 
 	assert(ctx->args);
 
 	// Left.
-//	cvSetImageROI(thr_img, cvRect(0, 0, 1, roi.height));
-	// can't get it: why is there a '1' for width?
-	cvSetImageROI(thr_img, cvRect(0, 0, roi.width, roi.height));
+	// Sum up the most left row
+	cvSetImageROI(thr_img, cvRect(0, 0, 1, roi.height));
 	left_sum = (int)cvSum(thr_img).val[0];
+	cvSetImageROI(thr_img, roi);
 
-	// Right.
-	// same here...
-	cvSetImageROI(thr_img, cvRect(roi.width - 1, 0, roi.width, roi.height));
+	// Sum up the most right row
+	cvSetImageROI(thr_img, cvRect(roi.width - 1, 0, 1, roi.height));
 	right_sum = (int)cvSum(thr_img).val[0];
+	cvSetImageROI(thr_img, roi);
+
+	if (ctx->super.debug) printf("Left: %d, Right: %d\n", left_sum, right_sum);
 
 	if (abs(left_sum - right_sum) > 25)
 	{
-		if (ctx->super.debug) printf("Left: %d, Right: %d\n", left_sum, right_sum);
+//		if (ctx->super.debug) printf("Left: %d, Right: %d\n", left_sum, right_sum);
 
 		if (right_sum > left_sum)
 		{
@@ -175,8 +177,6 @@ match_direction_t catcierge_haar_guess_direction(catcierge_haar_matcher_t *ctx, 
 			dir = (args->in_direction == DIR_LEFT) ? MATCH_DIR_IN : MATCH_DIR_OUT;
 		}
 	}
-
-	cvSetImageROI(thr_img, roi);
 
 	if (inverted && (dir != MATCH_DIR_UNKNOWN))
 	{

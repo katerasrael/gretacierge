@@ -121,6 +121,7 @@ int main(int argc, char **argv)
 	memset(&result, 0, sizeof(result));
 
 	fprintf(stderr, "Catcierge Image match Tester (C) Joakim Soderberg 2013-2016\n");
+	fprintf(stderr, "(modified) Andreas Bär 2019 \n");
 
 	if (catcierge_args_init(&args, argv[0]))
 	{
