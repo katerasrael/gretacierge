@@ -333,6 +333,11 @@ if (WITH_ZMQ)
 	list(APPEND LIBS "${CZMQ_LIBRARIES}")
 endif()
 
+if (GPIO_NEW)
+	add_definitions(-DGPIO_NEW)
+endif()
+
+
 # Catcierge lib.
 set(LIB_SRC
 	"${PROJECT_SOURCE_DIR}/src/catcierge_strftime.c"
@@ -575,9 +580,10 @@ message("           Compile with coverage support")
 message("                  (-DCATCIERGE_COVERAGE): ${CATCIERGE_COVERAGE}")
 message("      Generate http://coveralls.io/ json:")
 message("                  (-DCATCIERGE_COVERALLS) ${CATCIERGE_COVERALLS}")
-message("                 Upload json to coverlls:")
+message("                Upload json to coveralls:")
 message("           (-DCATCIERGE_COVERALLS_UPLOAD) ${CATCIERGE_COVERALLS_UPLOAD}")
 message("   Compile with ZMQ support (-DWITH_ZMQ): ${WITH_ZMQ}")
+message("   Compile w pigpio support (-DGPIO_NEW): ${GPIO_NEW}")
 message("                             OpenCV Libs: ${OpenCV_LIBS}")
 message("                              OpenCV DIR: ${OpenCV_DIR}")
 message("-----------------------------------------------------------------")
