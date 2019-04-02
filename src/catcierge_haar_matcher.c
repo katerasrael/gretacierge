@@ -417,7 +417,10 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 	// This way for big mice and such we still get some white on each side of it.
 	// TODO: Make this a commandline argument.
 	roi->width += 30;
-	roi->x = roi->x + ((ctx->args->in_direction == DIR_RIGHT) ? -30 : 30);	// TODO: Direction is unknown at this step!
+
+	if (ctx->super.debug) printf("Direction Arg: %d\n", ctx->args->in_direction);
+
+	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -30 : 30);
 	if (roi->x < 0) roi->x = 0;
 }
 
@@ -661,10 +664,12 @@ static int parse_in_direction(cargo_t ctx, void *user, const char *optname,
 
 	if (!strcasecmp(d, "left"))
 	{
+		if (ctx->super.debug) printf("Direction Arg: left\n");
 		*in_dir = DIR_LEFT;
 	}
 	else if (!strcasecmp(d, "right"))
 	{
+		if (ctx->super.debug) printf("Direction Arg: right\n");
 		*in_dir = DIR_RIGHT;
 	}
 	else
