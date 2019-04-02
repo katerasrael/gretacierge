@@ -3,8 +3,9 @@
 # -----------------------
 #
 # Copyright (c) Joakim Soderberg 2013-2016
+# Copyright (c) Andreas Baer 2019
 #
-#  This file is part of Catcierge.
+#  This file is part of Gretacierge.
 #
 #    Catcierge is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -476,6 +477,7 @@ install(TARGETS ${CATCIERGE_PROGRAMS}
 install(FILES
 		"${PROJECT_SOURCE_DIR}/extra/catcierge.xml"
 		"${PROJECT_SOURCE_DIR}/extra/catcierge-twitter.py"
+		"${PROJECT_SOURCE_DIR}/extra/catcierge-telegram.py"
 		"${PROJECT_SOURCE_DIR}/extra/catcierge-compose.py"
 		"${PROJECT_SOURCE_DIR}/extra/catcierge-sendmail-new.py"
 		DESTINATION "${CATCIERGE_EXTRA_DIR}/" COMPONENT Runtime)
@@ -506,12 +508,12 @@ if (UNIX)
 	set(CPACK_PACKAGE_VERSION_MAJOR "${CATCIERGE_VERSION_MAJOR}")
 	set(CPACK_PACKAGE_VERSION_MINOR "${CATCIERGE_VERSION_MINOR}")
 	set(CPACK_PACKAGE_VERSION_PATCH "${CATCIERGE_VERSION_PATCH}")
-	set(CPACK_PACKAGE_VENDOR "Andreas Bär")
+	set(CPACK_PACKAGE_VENDOR "Andreas Baer")
 	set(CPACK_PACKAGE_CONTACT "https://github.com/katerasrael/gretacierge")
 	set(CPACK_GENERATOR DEB;TGZ)
 
-	set(CPACK_PACKAGE_NAME "catcierge")
-	set(LINUX_PACKAGE_DESCRIPTION "Catcierge, intelligent cat door. https://github.com/JoakimSoderberg/catcierge")
+	set(CPACK_PACKAGE_NAME "gretacierge")
+	set(LINUX_PACKAGE_DESCRIPTION "Gretacierge, intelligent cat door. https://github.com/katerasrael/gretacierge")
 
 	set(CPACK_PACKAGE_FILE_NAME "catcierge-${CATCIERGE_VERSION_STR}")
 
