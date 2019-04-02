@@ -420,7 +420,7 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 
 	printf("Direction Arg: %d\n", ctx->args->in_direction);
 
-	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -30 : 30);
+	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -30 : 30); // TODO
 	if (roi->x < 0) roi->x = 0;
 }
 
