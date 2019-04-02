@@ -83,9 +83,20 @@ $ cd gretacierge
 $ git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
 $ mkdir build && cd build
-$ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF  # Raspbian has no CZMQ package.
+$ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON  # Raspbian has no CZMQ package.
 $ make
 ```
+
+For the use of [pigpio](http://abyz.me.uk/rpi/pigpio/)-support use:
+
+```bash
+$ sudo apt-get install pigpio
+```
+
+Add -DGPIO_NEW=ON (default is ON) to the cmake args. Turn it OFF, to get back to the original GPIO-handling.
+
+ 
+
 
 If you want ZMQ support:
 
