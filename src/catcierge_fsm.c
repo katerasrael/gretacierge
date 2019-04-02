@@ -36,6 +36,10 @@
 #include "catcierge_gpio.h"
 #endif
 
+#ifdef GPIO_NEW
+#include <pigpio.h>
+#endif // GPIO_NEW
+
 #ifdef CATCIERGE_HAVE_UNISTD_H
 #include <unistd.h>
 #endif

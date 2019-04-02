@@ -19,6 +19,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef RPI
+#include "RaspiCamCV.h"
+#include "catcierge_gpio.h"
+#endif
+
 #ifdef GPIO_NEW
 #include <pigpio.h>
 #endif // GPIO_NEW
