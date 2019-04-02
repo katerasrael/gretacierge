@@ -418,7 +418,7 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 	// TODO: Make this a commandline argument.
 	roi->width += 30;
 
-	if (ctx->super.debug) printf("Direction Arg: %d\n", ctx->args->in_direction);
+	printf("Direction Arg: %d\n", ctx->args->in_direction);
 
 	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -30 : 30);
 	if (roi->x < 0) roi->x = 0;
