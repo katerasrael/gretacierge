@@ -443,20 +443,22 @@ if (UNIX)
 	#
 	# Generate systemd init files.
 	#
-	set(CATCIERGE_SERVICE_AFTER "")
-	if (RPI)
-		set(CATCIERGE_GPIO_SCRIPT_PATH "${PROJECT_BINARY_DIR}/catcierge_rpi_gpio.sh")
-		configure_file("${PROJECT_SOURCE_DIR}/cmake/catcierge_rpi_gpio.sh.in"
-					   "${CATCIERGE_GPIO_SCRIPT_PATH}")
-
-		configure_file("${PROJECT_SOURCE_DIR}/cmake/catcierge_rpi_gpio.service.in"
-					   "${PROJECT_BINARY_DIR}/catcierge_rpi_gpio.service")
-
-		# This is used in catcierge.service.in so that the gpio is always
-		# setup before the catcierge service on RPI.
-		set(CATCIERGE_SERVICE_AFTER "After=catcierge_rpi_gpio.service")
+	if (NOT GPIO_NEW)
+		set (CATCIERGE_SERVICE_AFTER "")
+		if (RPI)
+			set(CATCIERGE_GPIO_SCRIPT_PATH "${PROJECT_BINARY_DIR}/catcierge_rpi_gpio.sh")
+			configure_file("${PROJECT_SOURCE_DIR}/cmake/catcierge_rpi_gpio.sh.in"
+						   "${CATCIERGE_GPIO_SCRIPT_PATH}")
+	
+			configure_file("${PROJECT_SOURCE_DIR}/cmake/catcierge_rpi_gpio.service.in"
+						   "${PROJECT_BINARY_DIR}/catcierge_rpi_gpio.service")
+	
+			# This is used in catcierge.service.in so that the gpio is always
+			# setup before the catcierge service on RPI.
+			set(CATCIERGE_SERVICE_AFTER "After=catcierge_rpi_gpio.service")
+		endif()
 	endif()
-
+	
 	configure_file("${PROJECT_SOURCE_DIR}/cmake/catcierge.service.in"
 				   "${PROJECT_BINARY_DIR}/catcierge.service")
 
@@ -497,13 +499,15 @@ install(DIRECTORY "${PROJECT_SOURCE_DIR}/extra/fonts/"
 
 
 if (RPI)
-	install(FILES
-		"${CATCIERGE_GPIO_SCRIPT_PATH}"
-		DESTINATION "${CATCIERGE_EXTRA_DIR}/" COMPONENT Runtime)
-
-	install(FILES
-		"${PROJECT_BINARY_DIR}/catcierge_rpi_gpio.service"
-		DESTINATION "${SYSTEMD_CONFIG_DIR}/" COMPONENT Runtime)
+	if (NOT GPIO_NEW)
+		install(FILES
+			"${CATCIERGE_GPIO_SCRIPT_PATH}"
+			DESTINATION "${CATCIERGE_EXTRA_DIR}/" COMPONENT Runtime)
+	
+		install(FILES
+			"${PROJECT_BINARY_DIR}/catcierge_rpi_gpio.service"
+			DESTINATION "${SYSTEMD_CONFIG_DIR}/" COMPONENT Runtime)
+	endif()
 endif()
 
 #
