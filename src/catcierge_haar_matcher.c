@@ -417,7 +417,7 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 	// This way for big mice and such we still get some white on each side of it.
 	// TODO: Make this a commandline argument.
 	roi->width += 30;
-	roi->x = roi->x + ((ctx->args->in_direction == DIR_RIGHT) ? -30 : 30);
+	roi->x = roi->x + ((ctx->args->in_direction == DIR_RIGHT) ? -30 : 30);	// TODO: Direction is unknown at this step!
 	if (roi->x < 0) roi->x = 0;
 }
 
@@ -513,6 +513,8 @@ double catcierge_haar_matcher_match(void *octx,
 		// (We only use the first haar cascade match).
 		roi = result->match_rects[0];
 
+		if (ctx->super.debug) printf("Cat Head found. ROI: %d %d %d %d\n", roi.x, roi.y, roi.width, roi.height);
+
 		// If we're saving steps, include the original haar cascade
 		// match rectangle image.
 		if (save_steps)
@@ -523,7 +525,10 @@ double catcierge_haar_matcher_match(void *octx,
 				img_eq, result, "haar_roi", "Haar match", save_steps);
 		}
 
+
 		catcierge_haar_matcher_calculate_roi(ctx, &roi);
+		if (ctx->super.debug) printf("  Cropped ROI. ROI: %d %d %d %d\n", roi.x, roi.y, roi.width, roi.height);
+
 		cvSetImageROI(img_eq, roi);
 
 		catcierge_haar_matcher_save_step_image(ctx,
@@ -557,7 +562,7 @@ double catcierge_haar_matcher_match(void *octx,
 		// Don't bother looking for prey when the cat is going outside.
 		if ((result->direction) == MATCH_DIR_OUT)
 		{
-			if (ctx->super.debug) printf("Skipping prey detection!\n");
+			if (ctx->super.debug) printf("Going out - skipping prey detection!\n");
 			snprintf(result->description, sizeof(result->description) - 1,
 				"Skipped prey detection when going out");
 			goto done;
