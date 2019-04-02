@@ -335,6 +335,7 @@ endif()
 
 if (GPIO_NEW)
 	add_definitions(-DGPIO_NEW)
+	list(APPEND LIBS pigpio.so)
 endif()
 
 
@@ -544,6 +545,11 @@ if (UNIX)
 	if (WITH_ZMQ)
 		set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, libzmq-dev")
 	endif()
+	
+	if (GPIO_NEW)
+		set(CPACK_DEBIAN_PACKAGE_DEPENDS "${CPACK_DEBIAN_PACKAGE_DEPENDS}, pigpio")
+	endif()
+	
 	set(CPACK_DEBIAN_PACKAGE_MAINTAINER "asbaer@asrael.franken.de")
 	set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "${LINUX_PACKAGE_DESCRIPTION}")
 	set(CPACK_DEBIAN_PACKAGE_SECTION "Miscellaneous")
