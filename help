@@ -15,6 +15,7 @@ Usage: catcierge_grabber [--help] [--config CONFIG] [--config_rpi CONFIG_RPI] [-
                          [--match_done_cmd CMD [CMD ...]] [--frame_obstructed_cmd CMD [CMD ...]] [--uservar USERVAR [USERVAR ...]]
                          [--sigusr1 SIGUSR1] [--sigusr2 SIGUSR2]
                          [--roi X Y WIDTH HEIGHT, --auto_roi] {--template_matcher, --haar_matcher}
+                         [--roi_delta]
 
 Catcierge saves you from cleaning the floor!
 

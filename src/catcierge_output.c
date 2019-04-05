@@ -54,6 +54,9 @@ catcierge_output_var_t vars[] =
 	{ "matcher", "The matching algorithm used."},
 	{ "matchtime", "Value of --matchtime."},
 	{ "ok_matches_needed", "Value of --ok_matches_needed" },
+#ifdef ROI_DELTA
+	{ "roi_delta", "Value of --roi_delta" },
+#endif
 	{ "no_final_decision", "Value of --no_final_decision" },
 	{ "lockout_method", "Value of --lockout_method." },
 	{ "lockout_time", "Value of --lockout_time." },
@@ -1108,6 +1111,14 @@ const char *_catcierge_output_translate(catcierge_grb_t *grb,
 	{
 		return matcher_val;
 	}
+
+#ifdef ROI_DELTA
+	if (!strcmp(var, "roi_delta"))
+	{
+		snprintf(buf, bufsize - 1, "%d", grb->args.roi_delta);
+		return buf;
+	}
+#endif
 
 	if (!strcmp(var, "ok_matches_needed"))
 	{

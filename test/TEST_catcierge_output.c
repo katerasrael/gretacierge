@@ -186,6 +186,7 @@ static char *run_generate_tests()
 			{ "%prey_method%", "adaptive" },
 			{ "%prey_steps%", "2" },
 			{ "%no_final_decision%", "1" },
+			{ "%roi_delta%", "15" },
 			{ "%obstruct_filename%", "obstructify" }
 		};
 

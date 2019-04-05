@@ -297,6 +297,14 @@ static int add_matcher_options(cargo_t cargo, catcierge_args_t *args)
 			"Haar feature based matching algorithm (recommended).",
 			"b=", &args->matcher_type, MATCHER_HAAR);
 
+#ifdef ROI_DELTA
+	ret |= cargo_add_option(cargo, 0,
+			"<matcher> --roi_delta",
+			"Amount of pixels (defualt 15) the box around the lower half of the"
+			"found cat head is extended and moved to the side (depends on movement).",
+			"i", &args->roi_delta);
+#endif
+
 	ret |= cargo_add_option(cargo, 0,
 			"<matcher> --ok_matches_needed", NULL,
 			"i", &args->ok_matches_needed);
