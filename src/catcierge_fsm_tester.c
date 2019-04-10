@@ -203,6 +203,13 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Failed to set SIGINT handler\n");
 	}
 
+	// insert signal handling for the
+	// child processes to avoid zombies
+	if (signal(SIGCHLD, catcierge_catch_child) == SIG_ERR)
+	{
+		fprintf(stderr, "Failed to set SIGCHLD handler\n");
+	}
+
 	if (!(clear_img = create_clear_image()))
 	{
 		ret = -1; goto fail;

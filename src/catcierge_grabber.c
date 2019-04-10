@@ -170,6 +170,13 @@ void setup_sig_handlers()
 		CATERR("Failed to set SIGINT handler\n");
 	}
 
+	// insert signal handling for the
+	// child processes to avoid zombies
+	if (signal(SIGCHLD, catcierge_catch_child) == SIG_ERR)
+	{
+		fprintf(stderr, "Failed to set SIGCHLD handler\n");
+	}
+
 	#ifndef _WIN32
 	if (signal(SIGUSR1, sig_handler) == SIG_ERR)
 	{

@@ -52,6 +52,18 @@ const char *catcierge_path_sep()
 	#endif
 }
 
+void catcierge_catch_child(int sig_num)
+{
+    /* when we get here, we know there's a zombie child waiting
+     * add signal(SIGCHLD, catcierge_catch_child) to main()
+     */
+
+    int child_status;
+
+    wait(&child_status);
+
+}
+
 mode_t catcierge_file_mode(const char *filename)
 {
 	// Originally from CZMQ.
