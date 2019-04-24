@@ -20,6 +20,7 @@
 #define __CATCIERGE_ARGS_H__
 
 #include <stdio.h>
+#define _XOPEN_SOURCE
 #include <time.h>
 #include "alini/alini.h"
 #ifdef RPI
