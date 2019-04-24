@@ -71,9 +71,9 @@ typedef struct catcierge_args_s
 	char *steps_output_path;
 	char *obstruct_output_path;
 	char *template_output_path;
-#ifdef ROI_DELTA
+	#ifdef ROI_DELTA
 	int roi_delta;
-#endif
+	#endif // ROI_DELTA
 	int ok_matches_needed;
 	int save_steps;
 	int no_final_decision;

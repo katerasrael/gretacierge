@@ -303,7 +303,7 @@ static int add_matcher_options(cargo_t cargo, catcierge_args_t *args)
 			"Amount of pixels (defualt 15) the box around the lower half of the"
 			"found cat head is extended and moved to the side (depends on movement).",
 			"i", &args->roi_delta);
-#endif
+#endif // ROI_DELTA
 
 	ret |= cargo_add_option(cargo, 0,
 			"<matcher> --ok_matches_needed", NULL,
