@@ -841,6 +841,9 @@ void catcierge_args_init_vars(catcierge_args_t *args)
 	args->lockout_time = DEFAULT_LOCKOUT_TIME;
 	args->consecutive_lockout_delay = DEFAULT_CONSECUTIVE_LOCKOUT_DELAY;
 	args->ok_matches_needed = DEFAULT_OK_MATCHES_NEEDED;
+#ifdef ROI_DELTA
+	args->roi_delta = ROI_DELTA_DEFAULT;
+#endif // ROI_DELTA
 	args->output_path = strdup(".");
 	args->min_backlight = DEFAULT_MIN_BACKLIGHT;
 
