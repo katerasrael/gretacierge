@@ -48,7 +48,7 @@ void catcierge_xfree_list(char ***s, size_t *count);
 void print_line(FILE *fd, int length, const char *s);
 
 char *catcierge_read_file(const char *filename);
-void catcierge_catch_child(int sig_num)
+void catcierge_catch_child(int sig_num);
 char *catcierge_relative_path(const char *pfrom, const char *pto);
 
 int catcierge_split(char *str, char delim, char ***array, size_t *length);
