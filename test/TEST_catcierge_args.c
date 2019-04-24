@@ -185,7 +185,7 @@ static char *run_catcierge_parse_test()
 	PARSE_ARGV_START(0, &args, "catcierge", "--haar", "--roi_delta", "15");
 	mu_assert("Expected roi_delta == 15", args.roi_delta == 15);
 	PARSE_ARGV_END();
-#endif // ROI_DELTA
+#endif
 
 	{
 		PARSE_ARGV_START(0, &args, "catcierge", "--haar", "--lockout_method", "3");
