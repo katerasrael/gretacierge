@@ -1093,7 +1093,7 @@ void catcierge_print_settings(catcierge_args_t *args)
 	printf(" Min. backlight area: %d\n", args->min_backlight);
 	}
 #ifdef ROI_DELTA
-	printf("           Roi delta: %d\n", args->roi_delta);
+	printf("           Roi delta: %d pixels\n", args->roi_delta);
 #endif // ROI_DELTA
 	printf("          Show video: %d\n", args->show);
 	printf("        Save matches: %d\n", args->saveimg);
