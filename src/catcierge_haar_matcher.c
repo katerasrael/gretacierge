@@ -408,7 +408,11 @@ int catcierge_haar_matcher_find_prey(catcierge_haar_matcher_t *ctx,
 
 void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect *roi)
 {
-	int delta = 15;
+#ifdef ROI_DELTA
+	int delta =
+#else
+	int delta = ROI_DELTA_DEFAULT;
+#endif //ROI_DELTA
 
 	// Limit the roi to the lower part where the prey might be.
 	// (This gets rid of some false positives)

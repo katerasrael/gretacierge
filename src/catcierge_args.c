@@ -300,9 +300,9 @@ static int add_matcher_options(cargo_t cargo, catcierge_args_t *args)
 #ifdef ROI_DELTA
 	ret |= cargo_add_option(cargo, 0,
 			"<matcher> --roi_delta",
-			"Amount of pixels (defualt 15) the box around the lower half of the"
+			"Amount of pixels (default 15) the box around the lower half of the"
 			"found cat head is extended and moved to the side (depends on movement).",
-			"i", &args->roi_delta);
+			"i", &args->roi_delta, ROI_DELTA_DEFAULT);
 #endif // ROI_DELTA
 
 	ret |= cargo_add_option(cargo, 0,
@@ -1089,6 +1089,9 @@ void catcierge_print_settings(catcierge_args_t *args)
 	printf("  Auto ROI threshold: %d\n", args->auto_roi_thr);
 	printf(" Min. backlight area: %d\n", args->min_backlight);
 	}
+#ifdef ROI_DELTA
+	printf("           Roi delta: %d\n", args->roi_delta);
+#endif // ROI_DELTA
 	printf("          Show video: %d\n", args->show);
 	printf("        Save matches: %d\n", args->saveimg);
 	printf("       Save obstruct: %d\n", args->save_obstruct_img);
@@ -1166,6 +1169,9 @@ catcierge_matcher_args_t *catcierge_get_matcher_args(catcierge_args_t *args)
 		margs->min_backlight = args->min_backlight;
 		margs->auto_roi_thr = args->auto_roi_thr;
 		margs->save_auto_roi_img = args->save_auto_roi_img;
+#ifdef ROI_DELTA
+		margs->roi_delta = args->roi_delta;
+#endif // ROI_DELTA
 	}
 
 	return margs;

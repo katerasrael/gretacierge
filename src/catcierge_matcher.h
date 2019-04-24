@@ -46,6 +46,9 @@ typedef struct catcierge_matcher_args_s
 	int auto_roi_thr;
 	int min_backlight;
 	int save_auto_roi_img;
+#ifdef ROI_DELTA
+	int	roi_delta;
+#endif // ROI_DELTA
 } catcierge_matcher_args_t;
 
 typedef struct catcierge_matcher_s
