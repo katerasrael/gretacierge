@@ -179,6 +179,13 @@ int main(int argc, char **argv)
 		}
 	}
 
+	// insert signal handling for the
+	// child processes to avoid zombies
+	if (signal(SIGCHLD, catcierge_catch_child) == SIG_ERR)
+	{
+		fprintf(stderr, "Failed to set SIGCHLD handler\n");
+	}
+
 	start = clock();
 
 	if (ctx.test_matchable)

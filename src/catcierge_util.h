@@ -36,6 +36,7 @@ const char *catcierge_skip_whitespace(const char *it);
 char *catcierge_skip_whitespace_alt(char *it);
 char **catcierge_parse_list(const char *input, size_t *list_count, int end_trim);
 
+void catcierge_catch_child(int sig_num);
 void catcierge_run(char *command);
 const char *catcierge_path_sep();
 char *catcierge_get_abs_path(const char *path, char *buf, size_t buflen);
@@ -47,7 +48,7 @@ void catcierge_xfree_list(char ***s, size_t *count);
 void print_line(FILE *fd, int length, const char *s);
 
 char *catcierge_read_file(const char *filename);
-
+void catcierge_catch_child(int sig_num)
 char *catcierge_relative_path(const char *pfrom, const char *pto);
 
 int catcierge_split(char *str, char delim, char ***array, size_t *length);
