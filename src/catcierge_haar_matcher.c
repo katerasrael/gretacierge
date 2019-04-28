@@ -409,7 +409,7 @@ int catcierge_haar_matcher_find_prey(catcierge_haar_matcher_t *ctx,
 void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect *roi)
 {
 #ifdef ROI_DELTA
-	int delta =
+	int delta = ctx->args->super.roi_delta;
 #else
 	int delta = ROI_DELTA_DEFAULT;
 #endif //ROI_DELTA
@@ -429,6 +429,7 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 
 	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -delta : delta);
 	if (roi->x < 0) roi->x = 0;
+	if (roi->x < ctx->args->super->roi.x) roi->x = ctx->args->super->roi.x;
 }
 
 double catcierge_haar_matcher_match(void *octx,
