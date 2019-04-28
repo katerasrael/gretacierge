@@ -427,6 +427,8 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 	if (ctx->super.debug && (ctx->args->in_direction == DIR_LEFT)) printf("  Left direction, move ROI left\n");
 	if (ctx->super.debug && (ctx->args->in_direction == DIR_RIGHT)) printf("  Right direction, move ROI right\n");
 
+	if (ctx->super.debug) printf("Original ROI: %d %d %d %d\n", ctx->args->super.roi->x, ctx->args->super.roi->y, ctx->args->super.roi->width, ctx->args->super.roi->height);
+
 	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -delta : delta);
 	if (roi->x < 0) roi->x = 0;
 	if (roi->x < ctx->args->super.roi->x) roi->x = ctx->args->super.roi->x;
