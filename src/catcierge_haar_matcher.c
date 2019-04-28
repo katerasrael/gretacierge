@@ -410,7 +410,6 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 {
 #ifdef ROI_DELTA
 	int delta = ctx->args->super.roi_delta;
-	if (ctx->super.debug) printf(" using roi_delta: %d\n", ctx->args->super.roi_delta);
 #else
 	int delta = ROI_DELTA_DEFAULT;
 #endif //ROI_DELTA
@@ -431,8 +430,13 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 	if (ctx->super.debug) printf("Original ROI: %d %d %d %d\n", ctx->args->super.roi->x, ctx->args->super.roi->y, ctx->args->super.roi->width, ctx->args->super.roi->height);
 
 	roi->x = roi->x + ((ctx->args->in_direction == DIR_LEFT) ? -delta : delta);
+
+	// check, that x is in its boundarys
 	if (roi->x < 0) roi->x = 0;
 	if (roi->x < ctx->args->super.roi->x) roi->x = ctx->args->super.roi->x;
+
+	// check the right wing
+	if (roi->x + roi->width > ctx->args->super.roi->x + ctx->args->super.roi->width) roi->x = ctx->args->super.roi->x + ctx->args->super.roi->width - roi->width;
 }
 
 double catcierge_haar_matcher_match(void *octx,

@@ -1174,7 +1174,6 @@ catcierge_matcher_args_t *catcierge_get_matcher_args(catcierge_args_t *args)
 		margs->save_auto_roi_img = args->save_auto_roi_img;
 #ifdef ROI_DELTA
 		margs->roi_delta = args->roi_delta;
-		printf("Original ROI: %d %d %d %d\n", margs->roi->x, margs->roi->y, margs->roi->width, margs->roi->height);
 #endif // ROI_DELTA
 	}
 
