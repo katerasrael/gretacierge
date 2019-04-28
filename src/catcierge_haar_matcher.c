@@ -410,6 +410,7 @@ void catcierge_haar_matcher_calculate_roi(catcierge_haar_matcher_t *ctx, CvRect 
 {
 #ifdef ROI_DELTA
 	int delta = ctx->args->super.roi_delta;
+	if (ctx->super.debug) printf(" using roi_delta: %d\n", ctx->args->super.roi_delta);
 #else
 	int delta = ROI_DELTA_DEFAULT;
 #endif //ROI_DELTA
