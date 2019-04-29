@@ -3,7 +3,7 @@
 
 Catcierge
 =========
-![Gretacierge](https://raw.githubusercontent.com/katerasrael/gretacierge-examples/master/diy/small_logo.jpg)
+![catcierge](https://raw.githubusercontent.com/JoakimSoderberg/catcierge-examples/master/diy/small_logo.jpg)
 
 Gretacierge is a fork of the [catcierge][catcierge]-project, developed by Joakim Soderberg.
 
