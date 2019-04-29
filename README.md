@@ -1,15 +1,13 @@
 [![Travis Build Status][travis_img]][travis]
-[![Circle CI][circleci_img]][circleci]
-[![Appveyor Build status][appveyor_img]][appveyor]
-[![Coveralls Status][coveralls_img]][coveralls]
-[![Codecov Status][codecov_img]][codecov]
-[![Coverity Scan Build Status][coverity_img]][coverity]
+
 
 Catcierge
 =========
 ![Gretacierge](https://raw.githubusercontent.com/katerasrael/gretacierge-examples/master/diy/small_logo.jpg)
 
-Catcierge is an image recognition and RFID detection system for a DIY cat door.
+Gretacierge is a fork of the [catcierge][catcierge]-project, developed by Joakim Soderberg.
+
+Gretacierge is an image recognition and RFID detection system for a DIY cat door.
 It can be used to detect prey that the cat tries to bring in,
 or if a neighbour cat is trying to get in. The design is targeted for use with the
 Raspberry Pi including the camera board. However, it also runs on Windows, Linux and OSX with a normal webcam.
@@ -23,14 +21,10 @@ Build status
 | Service               | Status                                                                                                                                                     |
 |-----------------------|----------------------------------------------------------|
 | Travis-CI (Linux/OSX) | [![Travis Build Status][travis_img]][travis]             |
-| CircleCI (Linux)      | [![Circle CI][circleci_img]][circleci]                   |
-| Appveyor (Windows)    | [![Appveyor Build status][appveyor_img]][appveyor]       |
-| Unit Test Coverage    | [![Coverage Status][coveralls_img]][coveralls]           |
-| Statical Analysis     | [![Coverity Scan Build Status][coverity_img]][coverity]  |
 
 Background
 ----------
-The Catcierge project came about to solve the problem of our cat having the
+The [Catcierge][catcierge] project came about to solve the problem of our cat having the
 nasty habit of delivering "gifts" through our cat door in the form
 of dead, or partly dead / fully alive rodents or birds.
 
@@ -83,7 +77,7 @@ $ cd gretacierge
 $ git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
 $ mkdir build && cd build
-$ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON  # Raspbian has no CZMQ package.
+$ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
 $ make
 ```
 
@@ -308,6 +302,7 @@ $ docker run
     python find_backlight.py --threshold 140 /examples/some/image.png
 ```
 
+[catcierge]: https://github.com/JoakimSoderberg/catcierge
 [imagemagick]: http://www.imagemagick.org/
 [flo_control]: http://www.quantumpicture.com/Flo_Control/flo_control.htm]
 [raspicam_cv]: https://github.com/robidouille/robidouille/tree/master/raspicam_cv
@@ -316,15 +311,5 @@ $ docker run
 [rpi_userland]: https://github.com/raspberrypi/userland
 [catcierge_samples]: https://github.com/JoakimSoderberg/catcierge-samples
 
-[travis_img]: https://travis-ci.org/JoakimSoderberg/catcierge.png
+[travis_img]: https://travis-ci.org/katerasrael/gretacierge.svg?branch=master
 [travis]: https://travis-ci.org/JoakimSoderberg/catcierge
-[circleci_img]: https://circleci.com/gh/JoakimSoderberg/catcierge.svg?style=svg
-[circleci]: https://circleci.com/gh/JoakimSoderberg/catcierge
-[appveyor_img]: https://ci.appveyor.com/api/projects/status/6aq2tpajh1nmy6b3
-[appveyor]: https://ci.appveyor.com/project/JoakimSoderberg/catcierge
-[coveralls_img]: https://coveralls.io/repos/JoakimSoderberg/catcierge/badge.png
-[coveralls]: https://coveralls.io/r/JoakimSoderberg/catcierge
-[codecov]: http://codecov.io/github/JoakimSoderberg/catcierge?branch=master
-[codecov_img]: http://codecov.io/github/JoakimSoderberg/catcierge/coverage.svg?branch=master
-[coverity_img]: https://scan.coverity.com/projects/2506/badge.svg
-[coverity]: https://scan.coverity.com/projects/2506)
