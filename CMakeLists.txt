@@ -312,7 +312,7 @@ if (RPI)
 		${RPI_USERLAND}/lib/libmmal_util.so
 		${RPI_USERLAND}/lib/libvcos.so
 		${RPI_USERLAND}/lib/libbcm_host.so
-#		m
+		m # don't forget lm...
 		)
 
 	target_link_libraries(raspicamcv ${RASPICAM_LIBS})

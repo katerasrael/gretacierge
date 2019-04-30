@@ -76,6 +76,13 @@ $ git clone https://github.com/katerasrael/gretacierge.git
 $ cd gretacierge
 $ git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
+$ cd ..
+$ git clone https://github.com/raspberrypi/userland.git
+$ cd userland
+$ sh ./buildme
+$ ln -s build/lib ./lib
+$ ln -s build/inc ./include
+$ cd ../gretacierge
 $ mkdir build && cd build
 $ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
 $ make
