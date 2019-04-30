@@ -76,6 +76,7 @@ $ git clone https://github.com/katerasrael/gretacierge.git
 $ cd gretacierge
 $ git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
+### get userland
 $ cd ..
 $ git clone https://github.com/raspberrypi/userland.git
 $ cd userland
