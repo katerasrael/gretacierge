@@ -287,15 +287,16 @@ if (RPI)
 	include_directories(
 		${RPI_USERLAND}/host_applications/linux/libs/bcm_host/include/
 		${RPI_USERLAND}/host_applications/linux/apps/raspicam/
-		${RPI_USERLAND}/include/interface/vcos/pthreads/
-		${RPI_USERLAND}/include/interface/vmcs_host/linux/
-		${RPI_USERLAND}/include/interface/mmal/
-		${RPI_USERLAND}/include/interface/khronos/include/
-		${RPI_USERLAND}/include/
+		${RPI_USERLAND}/build/include/interface/vcos/pthreads/
+		${RPI_USERLAND}/build/include/interface/vmcs_host/linux/
+		${RPI_USERLAND}/build/include/interface/mmal/
+		${RPI_USERLAND}/build/include/interface/khronos/include/
+		${RPI_USERLAND}/build/include/
 		${RPI_USERLAND}/interface/vcos/pthreads/
 		${RPI_USERLAND}/interface/vmcs_host/linux/
 		${RPI_USERLAND}/interface/mmal/
 		${RPI_USERLAND}/interface/khronos/include/
+		${RPI_USERLAND}/build/
 		${RPI_USERLAND}/
 		${PROJECT_SOURCE_DIR}/rpi_userland/include/
 		${PROJECT_SOURCE_DIR}/src/raspicam_cv
@@ -307,11 +308,11 @@ if (RPI)
 	add_library(raspicamcv ${RASPICAM_SRC})
 
 	set(RASPICAM_LIBS
-		${RPI_USERLAND}/lib/libmmal_core.so
-		${RPI_USERLAND}/lib/libmmal.so
-		${RPI_USERLAND}/lib/libmmal_util.so
-		${RPI_USERLAND}/lib/libvcos.so
-		${RPI_USERLAND}/lib/libbcm_host.so
+		${RPI_USERLAND}/build/lib/libmmal_core.so
+		${RPI_USERLAND}/build/lib/libmmal.so
+		${RPI_USERLAND}/build/lib/libmmal_util.so
+		${RPI_USERLAND}/build/lib/libvcos.so
+		${RPI_USERLAND}/build/lib/libbcm_host.so
 		m # don't forget lm...
 		)
 
