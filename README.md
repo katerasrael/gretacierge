@@ -1,19 +1,20 @@
 [![Travis Build Status][travis_img]][travis]
 
 
-Catcierge
+Gretacierge
 =========
 ![catcierge](https://raw.githubusercontent.com/JoakimSoderberg/catcierge-examples/master/diy/small_logo.jpg)
 
-Gretacierge is a fork of the [catcierge][catcierge]-project, developed by Joakim Soderberg.
+Gretacierge is a fork of the [catcierge][catcierge]-project, developed by Joakim Soderberg. 
 
-Gretacierge is an image recognition and RFID detection system for a DIY cat door.
-It can be used to detect prey that the cat tries to bring in,
-or if a neighbour cat is trying to get in. The design is targeted for use with the
-Raspberry Pi including the camera board. However, it also runs on Windows, Linux and OSX with a normal webcam.
+Our cat (named Greta) is quite a talented hunteress and every new prey brought home brings some
+new troubles into our family...
+  
+Thanks to him and his fabulous project, Greta can kill the whole population of huntable animals - my wife
+doesn't have to bother about...
 
-There is also preliminary support for reading animal RFID tags commonly used for cats
-(the kind that veterinarians insert into their necks).
+I modified some parts to make it fit into my enviroment. For further informations about
+the original project see [catcierge][catcierge].
 
 Build status
 ------------
@@ -76,12 +77,18 @@ $ git clone https://github.com/katerasrael/gretacierge.git
 $ cd gretacierge
 $ git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
+### get userland
+$ cd ..
+$ git clone https://github.com/raspberrypi/userland.git
+$ cd userland
+$ sh ./buildme
+$ cd ../gretacierge
 $ mkdir build && cd build
 $ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
 $ make
 ```
 
-For the use of [pigpio](http://abyz.me.uk/rpi/pigpio/)-support use:
+For the use of [pigpio](https://github.com/joan2937/pigpio)-support use:
 
 ```bash
 $ sudo apt-get install pigpio
