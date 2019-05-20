@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>catcierge@gretacierge</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[Subprojects]</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Sources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Sources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Sources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Sources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Object Libraries</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] cargo_tests/Source Files/cargo.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo/cargo.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/cargo_ini.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo_ini.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_args.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_args.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_color.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_color.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_config.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/catcierge_config.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_events.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_events.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_fsm.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_haar_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_sigusr.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_sigusr_types.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr_types.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_template_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_template_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_test_common.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_test_helpers.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_timer.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_timer.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/catcierge_util.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_util.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/gettimeofday.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/win32/gettimeofday.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Lib Headers/uthash.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/uthash.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Source Files/catcierge_bg_tester.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_bg_tester.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Source Files/catcierge_test_common.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_bg_tester/Source Files/catcierge_test_helpers.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/cargo_ini.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo_ini.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_args.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_args.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_color.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_color.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_config.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/catcierge_config.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_events.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_events.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_fsm.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_haar_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_sigusr.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_sigusr_types.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr_types.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_template_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_template_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_test_common.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_test_helpers.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_timer.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_timer.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/catcierge_util.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_util.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/gettimeofday.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/win32/gettimeofday.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Lib Headers/uthash.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/uthash.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Source Files/catcierge_fsm_tester.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm_tester.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Source Files/catcierge_test_common.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_fsm_tester/Source Files/catcierge_test_helpers.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/cargo_ini.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo_ini.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_args.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_args.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_color.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_color.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_config.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/catcierge_config.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_events.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_events.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_fsm.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_haar_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_sigusr.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_sigusr_types.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr_types.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_template_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_template_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_test_common.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_test_helpers.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_timer.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_timer.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/catcierge_util.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_util.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/gettimeofday.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/win32/gettimeofday.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Lib Headers/uthash.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/uthash.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Source Files/catcierge_grabber.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_grabber.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Source Files/catcierge_test_common.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_grabber/Source Files/catcierge_test_helpers.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_args.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_args.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_fsm_consecutive_lockouts.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_fsm_consecutive_lockouts.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_fsm_droproot.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_fsm_droproot.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_fsm_haar_matcher.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_fsm_haar_matcher.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_fsm_misc.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_fsm_misc.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_fsm_rfid.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_fsm_rfid.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_fsm_template_matcher.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_fsm_template_matcher.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_matcher.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_matcher.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_output.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_output.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_rfid.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_rfid.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_strftime.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_strftime.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_timer.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_timer.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_catcierge_util.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_catcierge_util.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/TEST_sha1.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/TEST_sha1.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/catcierge_regress.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_regress.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/catcierge_test_common.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_regress/Source Files/catcierge_test_helpers.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/cargo_ini.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo_ini.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_args.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_args.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_color.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_color.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_config.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/catcierge_config.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_events.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_events.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_fsm.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_haar_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_sigusr.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_sigusr_types.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr_types.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_template_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_template_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_test_common.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_test_helpers.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_timer.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_timer.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/catcierge_util.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_util.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/gettimeofday.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/win32/gettimeofday.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Lib Headers/uthash.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/uthash.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Source Files/catcierge_test_common.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_common.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Source Files/catcierge_test_helpers.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/test/catcierge_test_helpers.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] catcierge_tester/Source Files/catcierge_tester.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_tester.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/cargo_ini.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo_ini.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_args.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_args.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_color.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_color.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_config.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/catcierge_config.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_events.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_events.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_fsm.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_haar_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_sigusr.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_sigusr_types.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr_types.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_template_matcher.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_template_matcher.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_timer.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_timer.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/catcierge_util.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_util.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/gettimeofday.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/win32/gettimeofday.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Headers/uthash.h</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/uthash.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/alini.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/alini/alini.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/cargo.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo/cargo.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/cargo_ini.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/cargo_ini.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_args.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_args.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_fsm.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_fsm.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_haar_matcher.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_matcher.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_haar_wrapper.cpp</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_haar_wrapper.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_log.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_log.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_matcher.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_matcher.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_output.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_output.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_sigusr.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_sigusr.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_strftime.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_strftime.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_template_matcher.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_template_matcher.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_timer.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_timer.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/catcierge_util.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/catcierge_util.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/gettimeofday.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/win32/gettimeofday.c</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] catcierge/Lib Sources/sha1.c</name>
+			<type>1</type>
+			<location>C:/Users/abaer/git/gretacierge/src/sha1/sha1.c</location>
+		</link>
+	</linkedResources>
+</projectDescription>
