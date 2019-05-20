@@ -1515,7 +1515,7 @@ int catcierge_state_lockout(catcierge_grb_t *grb)
 	// Start the lockout timer right away and unlock after that.
 	if (catcierge_timer_has_timed_out(&grb->lockout_timer))
 	{
-		CATLOG("End of lockout! (timed out after %.2f seconds)\n",
+		CATLOG("catcierge_timer_has_timed_out End of lockout! (timed out after %.2f seconds)\n",
 			catcierge_timer_get(&grb->lockout_timer));
 
 		catcierge_after_lockout(grb);
