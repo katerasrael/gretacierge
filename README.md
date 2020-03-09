@@ -254,10 +254,16 @@ $ catcierge_rfid_tester
 
 ### Background ###
 
+First of all, capture a image via (use the right rotation that fits your situation!) with --width and --height set, otherwise the rapsi is quite slow trying to calculate and display the found borders:
+
+```bash
+$ raspistill --rotation 90 --width 320 --height 240 --output bg_test_image.png
+```
+
 There is a program that helps you tweak background settings:
 
 ```bash
-$ catcierge_bg_tester --interactive --haar --cascade /path/to/catcierge.xml bg_image.png
+$ catcierge_bg_tester --interactive bg_test_image.png
 ```
 
 Prototypes
