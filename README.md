@@ -254,6 +254,11 @@ $ catcierge_rfid_tester
 
 ### Background ###
 
+Stop the catcierge-service
+```bash
+$ systemctl stop catcierge
+```
+
 First of all, capture a image via (use the right rotation that fits your situation!) with --width and --height set, otherwise the rapsi is quite slow trying to calculate and display the found borders:
 
 ```bash
@@ -265,6 +270,24 @@ There is a program that helps you tweak background settings:
 ```bash
 $ catcierge_bg_tester --interactive bg_test_image.png
 ```
+
+With the found threshhold (in example: 123) start the catcierge_grabber-command
+
+```bash
+$ catcierge_grabber --auto_roi --save_auto_roi theimage.png --auto_roi_thr 123
+```
+
+Watch the output, the obstruction region of interest will be displayed. Put these values in the systemd-service file (will be placed at /lib/systemd/system/catcierge.service) and run
+
+```bash
+$ systemctl. daemon-reload
+```
+
+Start the catcierge-service
+```bash
+$ systemctl start catcierge
+```
+
 
 Prototypes
 ----------
