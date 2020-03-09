@@ -1072,9 +1072,7 @@ static match_direction_t catcierge_guess_overall_direction(catcierge_grb_t *grb)
 				case MATCH_DIR_UNKNOWN: unknown_count++; break;
 			}
 		}
-		fprintf(stderr, "in_count: %d\n", in_count);
-		fprintf(stderr, "out_count: %d\n", out_count);
-		fprintf(stderr, "unknown_count: %d\n", unknown_count);
+//		fprintf(stderr, "in_count: %d, out_count: %d, unknown_count: %d\n", in_count, out_count, unknown_count);
 
 		if ((in_count > out_count) && (in_count > unknown_count))
 		{
@@ -1165,7 +1163,7 @@ void catcierge_decide_lock_status(catcierge_grb_t *grb)
 		// Otherwise if enough matches (default 2) are ok.
 		mg->success = (mg->success_count >= args->ok_matches_needed);
 
-		if (!mg->success)
+		if (!mg->success) //0 - does the code make sense?
 		{
 			snprintf(mg->description, sizeof(mg->description) - 1,
 				"Lockout %d of %d matches failed",

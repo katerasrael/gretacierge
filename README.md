@@ -255,6 +255,7 @@ $ catcierge_rfid_tester
 ### Background ###
 
 Stop the catcierge-service
+
 ```bash
 $ systemctl stop catcierge
 ```
@@ -274,16 +275,17 @@ $ catcierge_bg_tester --interactive bg_test_image.png
 With the found threshhold (in example: 123) start the catcierge_grabber-command
 
 ```bash
-$ catcierge_grabber --auto_roi --save_auto_roi theimage.png --auto_roi_thr 123
+$ catcierge_grabber --auto_roi --save_auto_roi outimage.png --auto_roi_thr 123
 ```
 
 Watch the output, the obstruction region of interest will be displayed. Put these values in the systemd-service file (will be placed at /lib/systemd/system/catcierge.service) and run
 
 ```bash
-$ systemctl. daemon-reload
+$ systemctl daemon-reload
 ```
 
 Start the catcierge-service
+
 ```bash
 $ systemctl start catcierge
 ```
