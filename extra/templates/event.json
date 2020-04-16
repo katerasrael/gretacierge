@@ -34,6 +34,7 @@
         },
         "matchtime": %matchtime%,
         "ok_matches_needed": %ok_matches_needed%,
+		"roi_delta": %roi_delta%,
         "no_final_decision": %no_final_decision%,
         "lockout_method": %lockout_method%,
         "lockout_time": %lockout_time%,
