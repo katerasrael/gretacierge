@@ -3,7 +3,7 @@
 # -----------------------
 #
 # Copyright (c) Joakim Soderberg 2013-2016
-# Copyright (c) Andreas Baer 2019
+# Copyright (c) Andreas Baer 2019/2020
 #
 #  This file is part of Gretacierge.
 #
