@@ -278,7 +278,7 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 		cvShowImage("obstruct_roi", img_cpy);
 
 		printf("\nroi: x: %d, y: %d, w: %d, h:%d\n",
-			roi.x, roi.y, roi.width, roi.height);
+			roi->x, roi->y, roi->width, roi->height);
 		printf("size: w: %d, h: %d\n", size.width, size.height);
 		printf("x: %d, y: %d, w: %d, h: %d\n", x, y, w, h);
 
