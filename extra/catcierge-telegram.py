@@ -19,10 +19,10 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 kernel_size = 20
 args = None
 
-DEBUG = True
+#DEBUG = True
 
 def log(s):
-    if DEBUG:
+    if args.debug:
         print s
 
 def telegram_sendpic(telegram_file,bot_token,bot_chat_id):
@@ -145,6 +145,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         height = 120
 
     # show original image
+    # TODO: show the ROI-Field as a coloured rect in the original image 
     if len(img_paths) >= 1:
         orgimg = imgs[0]    # Original image.
         img.composite(orgimg, left=mpos(orgimg.width), top=height) 
@@ -252,11 +253,11 @@ def create_matches(catcierge_json, output_file, args):
 
         step_count = match["step_count"]
         img_paths = []
-#        log("Stepcount %d" % step_count)
+        log("Stepcount %d" % step_count)
         
         for step in match["steps"][:step_count]:
             img_paths.append(os.path.join(base_path, step["path"]))
-#            log(" %s" % step["path"])
+            log(" %s" % step["path"])
 
 
         img = compose_img(img_paths=img_paths,
@@ -304,6 +305,9 @@ def main():
 
     parser.add_argument("--steps", action="store_true",
                     help="Incude the steps images.")
+
+    parser.add_argument("--debug", action="debug",
+                    help="Print out debug information.")
     # TODO: Implement NOT including steps...
 
     args = parser.parse_args()
@@ -325,8 +329,8 @@ def main():
         img = create_matches(catcierge_json, args.output, args)
         img.save(filename=args.output)
         
-        if args.bot_token:
-            telegram_sendpic(args.output,args.bot_token,args.bot_chat_id)
+    if args.bot_token:
+        telegram_sendpic(args.output,args.bot_token,args.bot_chat_id)
 
     print("Saved composed image: %s" % args.output)
 
