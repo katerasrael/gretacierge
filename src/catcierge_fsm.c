@@ -267,7 +267,8 @@ void catcierge_do_lockout(catcierge_grb_t *grb)
 		catcierge_trigger_event(grb, CATCIERGE_DO_LOCKOUT, 0);
 
 		#ifdef RPI
-		gpio_write(CATCIERGE_LOCKOUT_GPIO, 1);
+		if(!args->lockout_dummy)
+			gpio_write(CATCIERGE_LOCKOUT_GPIO, 1);
 
 		if (args->backlight_enable)
 		{
@@ -292,7 +293,8 @@ void catcierge_do_unlock(catcierge_grb_t *grb)
 		catcierge_trigger_event(grb, CATCIERGE_DO_UNLOCK, 0);
 
 		#ifdef RPI
-		gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
+		if(!args->lockout_dummy)
+			gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
 		
 		if (args->backlight_enable)
 		{
@@ -480,16 +482,20 @@ int catcierge_setup_gpio(catcierge_grb_t *grb)
 	}
 	else
 	{
-		// Set export for pins.
-		if (gpio_export(CATCIERGE_LOCKOUT_GPIO)
-		 || gpio_set_direction(CATCIERGE_LOCKOUT_GPIO, OUT))
+		if (!args->lockout_dummy)
 		{
-			CATERR("Failed to export and set direction for door pin\n");
-			ret = -1; goto fail;
-		}
+			// only set gpio pins if no test
+			// Set export for pins.
+			if (gpio_export(CATCIERGE_LOCKOUT_GPIO)
+			 || gpio_set_direction(CATCIERGE_LOCKOUT_GPIO, OUT))
+			{
+				CATERR("Failed to export and set direction for door pin\n");
+				ret = -1; goto fail;
+			}
 
-		// Start with the door open and light on.
-		gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
+			// Start with the door open and light on.
+			gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
+		}
 
 		if (args->backlight_enable)
 		{
@@ -542,16 +548,20 @@ int catcierge_setup_gpio(catcierge_grb_t *grb)
 		return 0;
 	}
 
-	// Set export for pins.
-	if (gpio_export(CATCIERGE_LOCKOUT_GPIO)
-	 || gpio_set_direction(CATCIERGE_LOCKOUT_GPIO, OUT))
-	{
-		CATERR("Failed to export and set direction for door pin\n");
-		ret = -1; goto fail;
-	}
 
-	// Start with the door open and light on.
-	gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
+	if (!args->lockout_dummy)
+	{
+		// Set export for pins.
+		if (gpio_export(CATCIERGE_LOCKOUT_GPIO)
+		 || gpio_set_direction(CATCIERGE_LOCKOUT_GPIO, OUT))
+		{
+			CATERR("Failed to export and set direction for door pin\n");
+			ret = -1; goto fail;
+		}
+
+		// Start with the door open and light on.
+		gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
+	}
 
 	if (args->backlight_enable)
 	{
