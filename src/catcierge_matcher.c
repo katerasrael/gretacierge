@@ -249,7 +249,8 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 	// TODO understand what is meant with the following lines
 	size = cvGetSize(img_cpy);
 	w = (int)(size.width / 2);
-	h = (int)(size.height * 0.1);
+//	h = (int)(size.height * 0.1);
+	h = (int)(size.height / 2);
 	x = (roi ? roi->x : 0) + (size.width - w) / 2;
 	y = (roi ? roi->y : 0) + (size.height - h) / 2;
 
@@ -279,7 +280,7 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 		//cvRectangleR(img, cvRect(x, y, w, h), CV_RGB(255, 0, 0), 2, 8, 0);
 //		cvShowImage("obstruct_roi", img_cpy);
 
-		printf("\norig_roi: x: %d, y: %d, w: %d, h:%d\n",
+//		printf("\norig_roi: x: %d, y: %d, w: %d, h:%d\n",
 			orig_roi.x, orig_roi.y, orig_roi.width, orig_roi.height);
 		printf("\nroi: x: %d, y: %d, w: %d, h:%d\n",
 			roi->x, roi->y, roi->width, roi->height);
