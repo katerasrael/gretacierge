@@ -270,7 +270,7 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 
 	sum = (int)cvSum(tmp2).val[0] / 255;
 
-	#if 0
+	#if 1
 	{
 		// NOTE! Since this function this runs very often, this should
 		// only ever be turned on while developing, it will spam ALOT.
