@@ -278,11 +278,13 @@ With the found threshhold (in example: 123) start the catcierge_grabber-command
 $ catcierge_grabber --auto_roi --save_auto_roi outimage.png --auto_roi_thr 123
 ```
 
-Watch the output, the obstruction region of interest will be displayed. Put these values in the systemd-service file (will be placed at /lib/systemd/system/catcierge.service) and run
+Watch the output, the obstruction region of interest will be displayed (eg x: 2 y: 25 w: 312 h: 144). Put these values in the config file
 
-```bash
-$ systemctl daemon-reload
-```
+roi=2	#x  
+roi=25	#y  
+roi=312	#width  
+roi=144	#height  
+
 
 Start the catcierge-service
 

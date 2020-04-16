@@ -11,6 +11,8 @@
 #   sudo cp ${CATCIERGE_CONF_BASE_PATH}/catcierge-example.cfg ${CATCIERGE_CONF_PATH}
 #
 
+# Caution: have a look at the docs how to set the --roi options
+
 noanim=1
 
 # Haar matcher
