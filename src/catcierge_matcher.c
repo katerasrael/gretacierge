@@ -275,7 +275,7 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 		// NOTE! Since this function this runs very often, this should
 		// only ever be turned on while developing, it will spam ALOT.
 		//cvRectangleR(img, cvRect(x, y, w, h), CV_RGB(255, 0, 0), 2, 8, 0);
-		cvShowImage("obstruct_roi", img_cpy);
+//		cvShowImage("obstruct_roi", img_cpy);
 
 		printf("\nroi: x: %d, y: %d, w: %d, h:%d\n",
 			roi->x, roi->y, roi->width, roi->height);
@@ -283,7 +283,7 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 		printf("x: %d, y: %d, w: %d, h: %d\n", x, y, w, h);
 
 		printf("Sum: %d\n", sum);
-		cvShowImage("obstruct", tmp2);
+//		cvShowImage("obstruct", tmp2);
 		//cvWaitKey(0);
 	}
 	#endif
