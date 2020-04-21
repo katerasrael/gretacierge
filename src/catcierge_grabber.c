@@ -203,6 +203,7 @@ int main(int argc, char **argv)
 
 	fprintf(stderr, ")\n(C) Joakim Soderberg 2013-2017\n");
 	fprintf(stderr, "(C) Andreas Bär 2019-2020\n\n");
+	fprintf(stderr, "Build: %s, %s\n\n", __DATE__, __TIME__);
 
 	fprintf(stderr, "Library versions:\n");
 	fprintf(stderr, " OpenCV v%d.%d.%d\n", CV_MAJOR_VERSION, CV_MINOR_VERSION, CV_SUBMINOR_VERSION);

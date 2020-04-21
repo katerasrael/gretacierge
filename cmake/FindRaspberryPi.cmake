@@ -4,7 +4,7 @@ function (CHECK_IS_RASPBERRY_PI IS_RPI MODEL)
         # Copied from
         # https://github.com/juj/fbcp-ili9341/blob/master/CMakeLists.txt
         # Detect if current hardware is Raspberry Pi Zero/Zero W
-	#
+	    #
         execute_process(COMMAND cat /proc/cpuinfo OUTPUT_VARIABLE CPU_INFO)
         STRING(REGEX MATCH "Revision[\t ]*:[\t ]*([0-9a-f]+)" BOARD_REVISION ${CPU_INFO})
         set(BOARD_REVISION "${CMAKE_MATCH_1}")
