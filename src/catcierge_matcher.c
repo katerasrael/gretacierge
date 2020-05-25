@@ -249,11 +249,13 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 	// TODO understand what is meant with the following lines
 	size = cvGetSize(img_cpy);
 	w = (int)(size.width / 2);
-	h = (int)(size.height * 0.1);
-//	h = (int)(size.height / 2);
+//	h = (int)(size.height * 0.1);
+	h = (int)(size.height / 2);
 	x = (roi ? roi->x : 0) + (size.width - w) / 2;
-	y = (roi ? roi->y : 0) + (size.height - h) / 2;
-
+	x = (int) (((roi ? roi->x : 0) + size.width) / 2) - (size.width / 4);
+//	y = (roi ? roi->y : 0) + (size.height - h) / 2;
+	y = (int) (((roi ? roi->y : 0) + size.height) / 2) - (size.height / 4);
+	
 	cvSetImageROI(img_cpy, cvRect(x, y, w, h));
 
 	// Only covert to grayscale if needed.
@@ -273,11 +275,11 @@ int catcierge_is_frame_obstructed(catcierge_matcher_t *ctx, const IplImage *img)
 
 	sum = (int)cvSum(tmp2).val[0] / 255;
 
-	#if 1
+	#if 0
 	{
 		// NOTE! Since this function this runs very often, this should
 		// only ever be turned on while developing, it will spam ALOT.
-		//cvRectangleR(img, cvRect(x, y, w, h), CV_RGB(255, 0, 0), 2, 8, 0);
+//		cvRectangleR(img, cvRect(x, y, w, h), CV_RGB(255, 0, 0), 2, 8, 0);
 		cvShowImage("obstruct_roi", img_cpy);
 
 		printf("\nroi: x: %d, y: %d, w: %d, h:%d\n",
