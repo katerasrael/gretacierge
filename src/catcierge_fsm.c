@@ -1008,6 +1008,9 @@ static void catcierge_show_image(catcierge_grb_t *grb)
 				cvRectangleR(tmp_img, res->match_rects[i], match_color, 2, 8, 0);
 			}
 
+			// show the ROI-Rectangle
+			cvRectangleR(tmp_img, args->roi, CV_RGB(0, 0, 0), 2, 8, 0);
+
 			img = tmp_img;
 		}
 
