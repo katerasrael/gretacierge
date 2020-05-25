@@ -97,7 +97,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         background_color =  "#8A968E"   #original grey
 
     img = Image(width=600, height=1124, background=Color(background_color))
-        
+
     #print("Font path: %s" % args.fonts)
 
     font = Font(path="%s/source-code-pro/SourceCodePro-Medium.otf" % args.fonts, size=64)
@@ -149,7 +149,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     if len(img_paths) >= 1:
         orgimg = imgs[0]    # Original image.
         img.composite(orgimg, left=mpos(orgimg.width), top=height) 
-    
+
 #    kernel5x1 = create_kernel(w=5, h=1) - won't need that
 
     # TODO: simplify the code below by making the symbols into images before they're used to create the rows.
@@ -157,11 +157,11 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         detected = imgs[1]    # Detected cat head roi. 
         croproi = imgs[2]    # Cropped/extended roi.
         height += orgimg.height + gap
-        
+
         # Detected head + cropped region of interest.
         head_row = create_row([detected, croproi], [0, 0], horizontal_gap, caption="Detected head  Cropped ROI")
         img.composite(head_row, left=mpos(head_row.width), top=height)
-    
+
     if len(img_paths) >= 6:
         globalthr = imgs[3]    # Global threshold (inverted).
         adpthr = imgs[4]    # Adaptive threshold (inverted).
@@ -182,7 +182,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
 
     if len(img_paths) >= 7:
         opened = imgs[6]    # Opened image.
-    
+
         height += thr_row.height + gap
         kernel2x2 = create_kernel(w=2, h=2)
 
@@ -254,7 +254,7 @@ def create_matches(catcierge_json, output_file, args):
         step_count = match["step_count"]
         img_paths = []
         log("Stepcount %d" % step_count)
-        
+
         for step in match["steps"][:step_count]:
             img_paths.append(os.path.join(base_path, step["path"]))
             log(" %s" % step["path"])
@@ -328,9 +328,9 @@ def main():
         catcierge_json = json.loads(open(args.json).read())
         img = create_matches(catcierge_json, args.output, args)
         img.save(filename=args.output)
-        
-    if args.bot_token:
-        telegram_sendpic(args.output,args.bot_token,args.bot_chat_id)
+
+        if args.bot_token:
+            telegram_sendpic(args.output,args.bot_token,args.bot_chat_id)
 
     print("Saved composed image: %s" % args.output)
 
