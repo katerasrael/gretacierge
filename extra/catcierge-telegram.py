@@ -19,8 +19,6 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 kernel_size = 20
 args = None
 
-#DEBUG = True
-
 def log(s):
     if args.debug:
         print s
@@ -306,8 +304,9 @@ def main():
     parser.add_argument("--steps", action="store_true",
                     help="Incude the steps images.")
 
-    parser.add_argument("--debug", action="debug",
+    parser.add_argument("--debug", action="store_true",
                     help="Print out debug information.")
+
     # TODO: Implement NOT including steps...
 
     args = parser.parse_args()
@@ -315,6 +314,9 @@ def main():
     if not args.output:
         print("You must specify an output file using --output")
         return -1
+
+    if args.debug:
+        log("Turning on debug information")
 
     if args.images:
         image_count = len(args.images)
@@ -330,6 +332,7 @@ def main():
         img.save(filename=args.output)
 
         if args.bot_token:
+#            log("sending pic...")
             telegram_sendpic(args.output,args.bot_token,args.bot_chat_id)
 
     print("Saved composed image: %s" % args.output)
