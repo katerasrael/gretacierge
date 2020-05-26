@@ -293,6 +293,13 @@ $ systemctl start catcierge
 ```
 
 
+Testing
+----------
+
+```bash
+$ export DISPLAY=:10.0; sudo ./build/bin/catcierge_grabber --show --highlight
+```
+
 Prototypes
 ----------
 
