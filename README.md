@@ -81,10 +81,13 @@ $ git submodule update --init # For the included repositories sources.
 $ cd ..
 $ git clone https://github.com/raspberrypi/userland.git
 $ cd userland
+### change line 24 in buildme
+### from 	cmake -DCMAKE_BUILD_TYPE=$BUILDTYPE -DARM64=$ARM64 ../../..
+### to 	cmake -DCMAKE_BUILD_TYPE=$BUILDTYPE -DARM64=$ARM64 
 $ sh ./buildme
 $ cd ../gretacierge
 $ mkdir build && cd build
-$ cmake .. -DRPI_USERLAND=/home/shares/users/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
+$ cmake .. -DRPI_USERLAND=../../userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
 $ make
 ```
 
