@@ -54,6 +54,52 @@ For the image recognition catcierge uses OpenCV via the
 [raspicam_cv library][raspicam_cv] written by [Emil Valkov][emil_valkov]
 (which is included in the catcierge source).
 
+OpenCV 2.4.13 on Raspberry Pi 4
+------------
+This sources can be compiled with the latest version of OpenCV2. Unfortunately the
+RaspberryOS comes with OpenCV4, which leads to compilation errors.
+Follow these steps to compile OpenCV2 on your own:
+
+```bash
+sudo apt install aptitude
+sudo aptitude install build-essential cmake cmake-qt-gui pkg-config libpng16-16 libpng-dev libpng++-dev libpnglite-dev zlib1g zlib1g-dev pngtools libtiff5-dev libtiff5 libtiffxx5 libtiff-tools libjpeg9 libjpeg9-dbg libjpeg-progs ffmpeg libavcodec-dev libavcodec58 libavformat58 libavformat-dev libgstreamer1.0-0 libgstreamer1.0-dev libxine2-ffmpeg libxine2-dev libxine2-bin libunicap2 libunicap2-dev libdc1394-22-dev libdc1394-22 libdc1394-utils swig libv4l-0 libv4l-dev python3-numpy libpython3.9 python-dev python-dev-is-python3 python3-dev libgtk2.0-dev pkg-config
+
+mkdir ~/opencv
+cd ~/opencv
+wget https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.13/opencv-2.4.13.zip
+unzip opencv*.zip
+cd opencv*
+mkdir build
+cd ./build/
+
+nano ../cmake/OpenCVPackaging.cmake
+set(OPENCV_VCSVERSION "2.4.13")
+
+sudo apt install libv4l-dev
+sudo ln -s /usr/include/libv4l1-videodev.h /usr/include/linux/videodev.h
+
+sudo apt install ffmpeg
+sudo mkdir /usr/include/ffmpeg
+sudo cp ../3rdparty/include/ffmpeg_/libavformat/avformat.h /usr/include/ffmpeg/avformat.h
+sudo cp ../3rdparty/include/ffmpeg_/libavformat/avio.h /usr/include/ffmpeg/avio.h
+sudo cp ../3rdparty/include/ffmpeg_/libavformat/version.h /usr/include/ffmpeg/version
+
+nano ../cmake/OpenCVDetectCXXCompiler.cmake
+comment out lines 85 + 86
+add
+set(CMAKE_OPENCV_GCC_VERSION_MAJOR 2)
+set(CMAKE_OPENCV_GCC_VERSION_MINOR 4)
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D BUILD_PYTHON_SUPPORT=ON -D BUILD_EXAMPLES=ON -D WITH_LIBV4L=ON -D WITH_V4L=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ..
+make
+sudo make install
+```
+https://github.com/opencv/opencv_contrib/issues/661
+https://otb-users.narkive.com/awEcQRM7/failed-to-build-otb-6-2-because-of-the-opencv
+https://stackoverflow.com/questions/40262928/error-compiling-opencv-fatal-error-stdlib-h-no-such-file-or-directory
+https://stackoverflow.com/questions/46884682/error-in-building-opencv-with-ffmpeg
+
+
 Full getting started guide for Raspberry Pi
 -------------------------------------------
 See [doc/](doc/README.md) for a full getting started guide.
@@ -67,34 +113,34 @@ Catcierge uses the CMake build system. To compile:
 First, to install OpenCV on raspbian:
 
 ```bash
-$ sudo apt-get install cmake libopencv-dev build-essential
+sudo apt-get install cmake libopencv-dev build-essential
 ```
 
 Then to build:
 
 ```bash
-$ git clone https://github.com/katerasrael/gretacierge.git
-$ cd gretacierge
-$ git submodule update --init # For the included repositories sources.
+git clone https://github.com/katerasrael/gretacierge.git
+cd gretacierge
+git submodule update --init # For the included repositories sources.
 ### $ ./build_userland.sh
 ### get userland
-$ cd ..
-$ git clone https://github.com/raspberrypi/userland.git
-$ cd userland
+cd ..
+git clone https://github.com/raspberrypi/userland.git
+cd userland
 ### change line 24 in buildme
 ### from 	cmake -DCMAKE_BUILD_TYPE=$BUILDTYPE -DARM64=$ARM64 ../../..
 ### to 	cmake -DCMAKE_BUILD_TYPE=$BUILDTYPE -DARM64=$ARM64 
-$ sh ./buildme
-$ cd ../gretacierge
-$ mkdir build && cd build
-$ cmake .. -DRPI_USERLAND=../../userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
-$ make
+sh ./buildme
+cd ../gretacierge
+mkdir build && cd build
+cmake .. -DRPI_USERLAND=../../userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
+make
 ```
 
 For the use of [pigpio](https://github.com/joan2937/pigpio)-support use:
 
 ```bash
-$ sudo apt-get install pigpio
+sudo apt-get install pigpio
 ```
 
 Add -DGPIO_NEW=ON (default is ON) to the cmake args. Turn it OFF, to get back to the original GPIO-handling.
@@ -105,34 +151,34 @@ Add -DGPIO_NEW=ON (default is ON) to the cmake args. Turn it OFF, to get back to
 If you want ZMQ support:
 
 ```bash
-$ sudo apt-get install libzmq3-dev
+sudo apt-get install libzmq3-dev
 ```
 
 ```bash
-$ git clone git@github.com:zeromq/czmq.git
-$ cd czmq
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
-$ make install  # either this, or see below
+git clone git@github.com:zeromq/czmq.git
+cd czmq
+mkdir build
+cd build
+cmake ..
+make
+make install  # either this, or see below
 
 # Or specify the locations manually where you built it.
-$ cmake -DWITH_ZMQ=ON -DCZMQ_LIBRARIES=/path/to/czmq/src/libczmq.so -D CZMQ_INCLUDE_DIRS=/path/to/czmq/include ..
+cmake -DWITH_ZMQ=ON -DCZMQ_LIBRARIES=/path/to/czmq/src/libczmq.so -D CZMQ_INCLUDE_DIRS=/path/to/czmq/include ..
 ```
 
 If you don't have any [RFID cat chip reader][rfid_cat] you can exclude
 it from the compilation:
 
 ```bash
-$ cmake -DWITH_RFID=OFF ..
+cmake -DWITH_RFID=OFF ..
 ```
 
 If you already have a version of the [raspberry pi userland libraries][rpi_userland] built,
 you can use that instead:
 
 ```bash
-$ cmake -DRPI_USERLAND=/path/to/rpi/userland ..
+cmake -DRPI_USERLAND=/path/to/rpi/userland ..
 ```
 
 However, note that the program only has been tested with the submodule version of
