@@ -5,13 +5,11 @@ Gretacierge
 =========
 ![catcierge](https://raw.githubusercontent.com/JoakimSoderberg/catcierge-examples/master/diy/small_logo.jpg)
 
-Gretacierge is a fork of the [catcierge][catcierge]-project, developed by Joakim Soderberg. 
+Gretacierge is a fork of the absolutely fabulous [catcierge][catcierge]-project, developed by Joakim Soderberg. 
 
-Our cat (named Greta) is quite a talented hunteress and every new prey brought home brings some
-new troubles into our family...
+Our cat (named Greta) is quite a talented hunteress and every new prey brought home brings some new troubles into our family...
   
-Thanks to him and his fabulous project, Greta can kill the whole population of huntable animals - my wife
-doesn't have to bother about...
+Thanks to him and his fabulous project, Greta can kill the whole population of huntable animals - my wife doesn't have to bother about...
 
 I modified some parts to make it fit into my enviroment. For further informations about
 the original project see [catcierge][catcierge].
@@ -25,7 +23,7 @@ Build status
 
 Background
 ----------
-The [Catcierge][catcierge] project came about to solve the problem of our cat having the
+The [catcierge][catcierge] project came about to solve the problem of our cat having the
 nasty habit of delivering "gifts" through our cat door in the form
 of dead, or partly dead / fully alive rodents or birds.
 
@@ -118,27 +116,31 @@ Catcierge uses the CMake build system. To compile:
 
 ### Raspberry Pi:
 
-First, to install OpenCV on raspbian:
+First, to install OpenCV on raspbian (not recommended, use the way described above):
 
 ```bash
-sudo apt-get install cmake libopencv-dev build-essential
+sudo apt-get install libopencv-dev 
 ```
 
 Then to build:
 
 ```bash
-git clone https://github.com/raspberrypi/userland.git
-cd userland
-### change line 24 in buildme
-### from 	cmake -DCMAKE_BUILD_TYPE=$BUILDTYPE -DARM64=$ARM64 ../../..
-### to 	cmake -DCMAKE_BUILD_TYPE=$BUILDTYPE -DARM64=$ARM64 
-sh ./buildme
+sudo apt-get install cmake build-essential
 
+# get the source
 git clone https://github.com/katerasrael/gretacierge.git
 cd gretacierge
+
+# userland
 git submodule update --init # For the included repositories sources.
+cd rpi_userland
+git checkout master
+git pull
+./build_userland.sh
+
+# the cierge
 mkdir build && cd build
-cmake .. -DRPI_USERLAND=/home/pi/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON # Raspbian has no CZMQ package.
+cmake .. -DRPI_USERLAND=/home/pi/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON
 make
 ```
 
