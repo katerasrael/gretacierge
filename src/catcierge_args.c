@@ -108,6 +108,11 @@ static int add_gpio_options(cargo_t cargo, catcierge_args_t *args)
 			"that you change the default pin when compiling.");
 
 	ret |= cargo_add_option(cargo, 0,
+			"<gpio> --gpio_disable",
+			"Disable all GPIO usage?",
+			"b", &args->gpio_disable);
+
+	ret |= cargo_add_option(cargo, 0,
 			"<gpio> --lockout_gpio_pin",
 			NULL,
 			"i", &args->lockout_gpio_pin);
@@ -859,6 +864,7 @@ void catcierge_args_init_vars(catcierge_args_t *args)
 		settings->graymode = 1;
 		raspiCamCvSetDefaultCameraParameters(&settings->camera_parameters);
 	
+		args->gpio_disable = 0;
 		args->lockout_gpio_pin = CATCIERGE_LOCKOUT_GPIO;
 		args->backlight_gpio_pin = CATCIERGE_BACKLIGHT_GPIO;
 		args->backlight_enable = 0;

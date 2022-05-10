@@ -126,6 +126,7 @@ typedef struct catcierge_args_s
 	size_t rfid_allowed_count;
 	#endif // WITH_RFID
 
+	int gpio_disable;
 	int lockout_gpio_pin;
 	int backlight_gpio_pin;
 	int backlight_enable;

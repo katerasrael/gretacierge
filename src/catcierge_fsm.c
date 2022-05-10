@@ -252,6 +252,12 @@ void catcierge_do_lockout(catcierge_grb_t *grb)
 	assert(grb);
 	args = &grb->args;
 
+	if (args->gpio_disable)
+	{
+		CATLOGFPS("!GPIO_DISABLED!\n");
+		return;
+	}
+
 	if (args->lockout_dummy)
 	{
 		CATLOGFPS("!LOCKOUT DUMMY!\n");
@@ -283,6 +289,12 @@ void catcierge_do_unlock(catcierge_grb_t *grb)
 	catcierge_args_t *args;
 	assert(grb);
 	args = &grb->args;
+
+	if (args->gpio_disable)
+	{
+		CATLOGFPS("!GPIO_DISABLED!\n");
+		return;
+	}
 
 	if (args->do_unlock_cmd)
 	{
@@ -468,6 +480,12 @@ int catcierge_setup_gpio(catcierge_grb_t *grb)
 	catcierge_args_t *args = &grb->args;
 	int ret = 0;
 
+	if (args->gpio_disable)
+	{
+		CATLOGFPS("!GPIO_DISABLED!\n");
+		return;
+	}
+
 	if (args->do_lockout_cmd)
 	{
 		CATLOG("Skipping GPIO setup since a custom lockout command is set:");
@@ -493,7 +511,7 @@ int catcierge_setup_gpio(catcierge_grb_t *grb)
 				ret = -1; goto fail;
 			}
 
-			// Start with the door open and light on.
+			// Start with the door open open.
 			gpio_write(CATCIERGE_LOCKOUT_GPIO, 0);
 		}
 
@@ -506,6 +524,7 @@ int catcierge_setup_gpio(catcierge_grb_t *grb)
 				ret = -1; goto fail;
 			}
 
+			// Start with the light on.
 			gpio_write(CATCIERGE_BACKLIGHT_GPIO, 1);
 		}
 	}
@@ -540,6 +559,12 @@ int catcierge_setup_gpio(catcierge_grb_t *grb)
 {
 	catcierge_args_t *args = &grb->args;
 	int ret = 0;
+
+	if (args->gpio_disable)
+	{
+		CATLOGFPS("!GPIO_DISABLED!\n");
+		return;
+	}
 
 	if (args->do_lockout_cmd)
 	{
