@@ -325,12 +325,12 @@ raspistill --rotation 90 --width 320 --height 240 --output bg_test_image.png
 There is a program that helps you tweak background settings (pu in the right path to the image and cascade):
 
 ```bash
-catcierge_bg_tester --haar_matcher --gpio_disable --cascade /home/pi/gretacierge/extra/catcierge.xml --interactive ../bg_test_image.png 
+catcierge_bg_tester --gpio_disable --haar_matcher --cascade /home/pi/gretacierge/extra/catcierge.xml --interactive ../bg_test_image.png 
 ```
 or you use the live feed
 
 ```bash
-catcierge_bg_tester --haar_matcher --gpio_disable --cascade /home/pi/gretacierge/extra/catcierge.xml --interactive --camera 
+catcierge_bg_tester --gpio_disable --haar_matcher --cascade /home/pi/gretacierge/extra/catcierge.xml --interactive --camera 
 ```
 
 
