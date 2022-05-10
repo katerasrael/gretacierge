@@ -202,7 +202,7 @@ int main(int argc, char **argv)
 	#endif
 
 	fprintf(stderr, ")\n(C) Joakim Soderberg 2013-2017\n");
-	fprintf(stderr, "(C) Andreas Bär 2019-2020\n\n");
+	fprintf(stderr, "(C) Andreas Bär 2019-2022\n\n");
 	fprintf(stderr, "Build: %s, %s\n\n", __DATE__, __TIME__);
 
 	fprintf(stderr, "Library versions:\n");
@@ -252,13 +252,18 @@ int main(int argc, char **argv)
 	}
 
 	#ifdef RPI
-	if (catcierge_setup_gpio(&grb))
+	if (args->gpio_disable)
 	{
-		CATERR("Failed to setup GPIO pins\n");
-		return -1;
+		CATLOGFPS("GPIO_DISABLED - won't use the GPIO\n");
+	} else
+	{
+		if (catcierge_setup_gpio(&grb))
+		{
+			CATERR("Failed to setup GPIO pins\n");
+			return -1;
+		}
+		CATLOG("Initialized GPIO pins\n");
 	}
-
-	CATLOG("Initialized GPIO pins\n");
 	#endif // RPI
 
 	assert((args->matcher_type == MATCHER_TEMPLATE)
