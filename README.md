@@ -313,25 +313,31 @@ $ catcierge_rfid_tester
 Stop the catcierge-service
 
 ```bash
-$ systemctl stop catcierge
+systemctl stop catcierge
 ```
 
 First of all, capture a image via (use the right rotation that fits your situation!) with --width and --height set, otherwise the rapsi is quite slow trying to calculate and display the found borders:
 
 ```bash
-$ raspistill --rotation 90 --width 320 --height 240 --output bg_test_image.png
+raspistill --rotation 90 --width 320 --height 240 --output bg_test_image.png
 ```
 
-There is a program that helps you tweak background settings:
+There is a program that helps you tweak background settings (pu in the right path to the image and cascade):
 
 ```bash
-$ catcierge_bg_tester --interactive bg_test_image.png
+catcierge_bg_tester --haar_matcher --gpio_disable --cascade /home/pi/gretacierge/extra/catcierge.xml --interactive ../bg_test_image.png 
 ```
+or you use the live feed
+
+```bash
+catcierge_bg_tester --haar_matcher --gpio_disable --cascade /home/pi/gretacierge/extra/catcierge.xml --interactive --camera 
+```
+
 
 With the found threshhold (in example: 123) start the catcierge_grabber-command
 
 ```bash
-$ catcierge_grabber --auto_roi --save_auto_roi outimage.png --auto_roi_thr 123
+catcierge_grabber --auto_roi --save_auto_roi outimage.png --auto_roi_thr 123
 ```
 
 Watch the output, the obstruction region of interest will be displayed (eg x: 2 y: 25 w: 312 h: 144). Put these values in the config file
@@ -345,7 +351,7 @@ roi=144	#height
 Start the catcierge-service
 
 ```bash
-$ systemctl start catcierge
+systemctl start catcierge
 ```
 
 
@@ -404,6 +410,11 @@ $ docker run
     ibotdotout/python-opencv
     python find_backlight.py --threshold 140 /examples/some/image.png
 ```
+
+### Known Bugs ###
+- the '--non_rpi_cam' doesn't work (program ist terminated due to a segfault)
+
+
 
 [catcierge]: https://github.com/JoakimSoderberg/catcierge
 [imagemagick]: http://www.imagemagick.org/
