@@ -425,5 +425,5 @@ $ docker run
 [rpi_userland]: https://github.com/raspberrypi/userland
 [catcierge_samples]: https://github.com/JoakimSoderberg/catcierge-samples
 
-[travis_img]: https://travis-ci.org/katerasrael/gretacierge.svg?branch=master
-[travis]: https://travis-ci.org/JoakimSoderberg/catcierge
+[travis_img]: https://travis-ci.com/katerasrael/gretacierge.svg?branch=master
+[travis]: https://travis-ci.com/katerasrael/gretacierge
