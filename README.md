@@ -60,7 +60,7 @@ Follow these steps to compile OpenCV2 on your own:
 
 ```bash
 sudo apt install aptitude
-sudo aptitude install build-essential cmake cmake-qt-gui pkg-config libpng16-16 libpng-dev libpng++-dev libpnglite-dev zlib1g zlib1g-dev pngtools libtiff5-dev libtiff5 libtiffxx5 libtiff-tools libjpeg9 libjpeg9-dbg libjpeg-progs ffmpeg libavcodec-dev libavcodec58 libavformat58 libavformat-dev libgstreamer1.0-0 libgstreamer1.0-dev libxine2-ffmpeg libxine2-dev libxine2-bin libunicap2 libunicap2-dev libdc1394-22-dev libdc1394-22 libdc1394-utils swig libv4l-0 libv4l-dev python3-numpy libpython3.9 python-dev python-dev-is-python3 python3-dev libgtk2.0-dev pkg-config libavresample-dev libswscale-dev libgstreamer-plugins-base1.0-dev cmake
+sudo aptitude install build-essential cmake cmake-qt-gui pkg-config libpng16-16 libpng-dev libpng++-dev libpnglite-dev zlib1g zlib1g-dev pngtools libtiff5-dev libtiff5 libtiffxx5 libtiff-tools libjpeg9 libjpeg9-dbg libjpeg-progs ffmpeg libavcodec-dev libavcodec58 libavformat58 libavformat-dev libgstreamer1.0-0 libgstreamer1.0-dev libxine2-ffmpeg libxine2-dev libxine2-bin libunicap2 libunicap2-dev libdc1394-22-dev libdc1394-22 libdc1394-utils swig libv4l-0 libv4l-dev python3-numpy libpython3.9 python-dev python-dev-is-python3 python3-dev libgtk2.0-dev pkg-config libavresample-dev libswscale-dev libgstreamer-plugins-base1.0-dev cmake libgtk2.0-dev
 
 mkdir ~/opencv
 cd ~/opencv
@@ -98,7 +98,7 @@ nano ../modules/highgui/src/cap_ffmpeg_impl.hpp
 
 # https://github.com/opencv/opencv_contrib/issues/661
 # https://stackoverflow.com/questions/40262928/error-compiling-opencv-fatal-error-stdlib-h-no-such-file-or-directory
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D BUILD_PYTHON_SUPPORT=ON -D BUILD_EXAMPLES=ON -D WITH_LIBV4L=ON -D WITH_V4L=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ..
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D BUILD_PYTHON_SUPPORT=ON -D BUILD_EXAMPLES=ON -D WITH_LIBV4L=ON -D WITH_GTK=ON -D WITH_V4L=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ..
 make
 sudo make install
 ```
