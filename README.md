@@ -136,11 +136,12 @@ git submodule update --init # For the included repositories sources.
 cd rpi_userland
 git checkout master
 git pull
+cd ..
 ./build_userland.sh
 
 # the cierge
 mkdir build && cd build
-cmake .. -DRPI_USERLAND=/home/pi/userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON
+cmake .. -DRPI_USERLAND=/home/pi/gretacierge/rpi_userland -DWITH_ZMQ=OFF -DWITH_RFID=OFF -DCATCIERGE_WITH_MEMCHECK=OFF -DCATCIERGE_COVERALLS_UPLOAD=OFF -DGPIO_NEW=ON -DROI_DELTA=ON
 make
 ```
 
