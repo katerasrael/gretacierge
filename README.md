@@ -103,6 +103,54 @@ make
 sudo make install
 ```
 
+OpenCV 2.4.13 on Ubuntu 18.04
+------------
+
+```bash
+# setup the build-process 
+# get software
+sudo apt install build-essential cmake cmake-qt-gui pkg-config libpng16-16 libpng-dev libpng++-dev libpnglite-dev zlib1g zlib1g-dev pngtools libtiff5-dev libtiff5 libtiffxx5 libtiff-tools libjpeg8 libjpeg8-dbg libjpeg-progs ffmpeg libavcodec-dev libavcodec57 libavformat57 libavformat-dev libgstreamer1.0-0 libgstreamer1.0-dev libxine2-ffmpeg libxine2-dev libxine2-bin libunicap2 libunicap2-dev libdc1394-22-dev libdc1394-22 libdc1394-utils swig libv4l-0 libv4l-dev python2.7-numpy libgtk2.0-dev pkg-config libswresample-dev libswscale-dev libgstreamer-plugins-base1.0-dev cmake libgtk2.0-dev
+
+mkdir ~/opencv
+cd ~/opencv
+wget https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.13/opencv-2.4.13.zip
+unzip opencv*.zip
+cd opencv*
+mkdir build
+cd ./build/
+
+nano ../cmake/OpenCVPackaging.cmake
+set(OPENCV_VCSVERSION "2.4.13")
+
+sudo ln -s /usr/include/libv4l1-videodev.h /usr/include/linux/videodev.h
+
+sudo mkdir /usr/include/ffmpeg
+sudo cp ../3rdparty/include/ffmpeg_/libavformat/avformat.h /usr/include/ffmpeg/avformat.h
+sudo cp ../3rdparty/include/ffmpeg_/libavformat/avio.h /usr/include/ffmpeg/avio.h
+sudo cp ../3rdparty/include/ffmpeg_/libavformat/version.h /usr/include/ffmpeg/version
+
+# [](https://otb-users.narkive.com/awEcQRM7/failed-to-build-otb-6-2-because-of-the-opencv)
+nano ../cmake/OpenCVDetectCXXCompiler.cmake
+# comment out lines 85 + 86
+# add
+  set(CMAKE_OPENCV_GCC_VERSION_MAJOR 2)
+  set(CMAKE_OPENCV_GCC_VERSION_MINOR 4)
+
+# [](https://stackoverflow.com/questions/46884682/error-in-building-opencv-with-ffmpeg)
+nano ../modules/highgui/src/cap_ffmpeg_impl.hpp
+# add
+#define AV_CODEC_FLAG_GLOBAL_HEADER (1 << 22)
+#define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER
+#define AVFMT_RAWPICTURE 0x0020
+
+sudo ln -s /usr/include/linux /usr/include/sys
+
+# https://github.com/opencv/opencv_contrib/issues/661
+# https://stackoverflow.com/questions/40262928/error-compiling-opencv-fatal-error-stdlib-h-no-such-file-or-directory
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D BUILD_PYTHON_SUPPORT=ON -D BUILD_EXAMPLES=ON -D WITH_LIBV4L=ON -D WITH_GTK=ON -D WITH_V4L=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ..
+make
+sudo make install
+```
 
 
 
