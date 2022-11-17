@@ -21,21 +21,21 @@ args = None
 
 def log(s):
     if args.debug:
-        print s
+        print(s)
 
 def telegram_sendpic(telegram_file,bot_token,bot_chat_id):
         bot = telegram.Bot(token=bot_token)
         bot.send_photo(bot_chat_id, open(telegram_file,'rb'))
 
 def create_kernel(w=3, h=3):
-    k = Image(width=w * kernel_size + 2, height=h * kernel_size + 2)
+    k = Image(width=int(w * kernel_size + 2), height=int(h * kernel_size + 2))
 
     draw = Drawing()
     draw.fill_color = Color("white")
     draw.stroke_color = Color("black")
 
-    for y in xrange(0,h):
-        for x in xrange(0,w):
+    for y in range(0,h):
+        for x in range(0,w):
             draw.rectangle(left=x*kernel_size, top=y*kernel_size,
                             width=kernel_size, height=kernel_size)
             draw(k)
@@ -65,7 +65,7 @@ def create_row(imgs, offsets, gap, fixed_width=0, caption=None, caption_offset=(
 
     for img in imgs:
         if isinstance(img, Image):
-            row.composite(img, left=x + offsets[i], top=(row_height - img.height) / 2)
+            row.composite(img, left=x + offsets[i], top=int((row_height - img.height) / 2) )
             x += img.width + offsets[i] + gap
         else:
             (offset_x, offset_y, width, font) = offsets[i]
@@ -117,15 +117,15 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
     # TODO: Allow any matcher type and number of images...    
 
     for img_path in img_paths:
-        #print img_path
+        #print(img_path)
         imgs.append(Image(filename=img_path))
 
     mpos = lambda w: (img.width - w) / 2
     x_start = 20
 
     # first we show the "Match %d"
-    text_width = font_title.size * int((len(caption)) * 0.7)   # get width - TODO why 0.7?
-    img.caption(caption, left=(img.width - text_width) / 2, top=5, width=text_width, height=100, font=font_title)
+    text_width = int(font_title.size * int((len(caption)) * 0.7))   # get width - TODO why 0.7?
+    img.caption(caption, left=int((img.width - text_width) / 2), top=5, width=text_width, height=100, font=font_title)
 
     # then we show the direction and description
     # TODO
@@ -138,15 +138,15 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
         else:
             text = direction + ' - ' + description
 
-        text_width = font_width * len(text)
-        img.caption(text, left=((img.width - text_width) / 2), top=80, width=text_width, height=100, font=desc_font)
+        text_width = int(font_width * len(text))
+        img.caption(text, left=int((img.width - text_width) / 2), top=80, width=text_width, height=100, font=desc_font)
         height = 120
 
     # show original image
     # TODO: show the ROI-Field as a coloured rect in the original image 
     if len(img_paths) >= 1:
         orgimg = imgs[0]    # Original image.
-        img.composite(orgimg, left=mpos(orgimg.width), top=height) 
+        img.composite(orgimg, left=int(mpos(orgimg.width)), top=height) 
 
 #    kernel5x1 = create_kernel(w=5, h=1) - won't need that
 
@@ -158,7 +158,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
 
         # Detected head + cropped region of interest.
         head_row = create_row([detected, croproi], [0, 0], horizontal_gap, caption="Detected head  Cropped ROI")
-        img.composite(head_row, left=mpos(head_row.width), top=height)
+        img.composite(head_row, left=int(mpos(head_row.width)), top=int(height))
 
     if len(img_paths) >= 6:
         globalthr = imgs[3]    # Global threshold (inverted).
@@ -176,7 +176,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
                             horizontal_gap, fixed_width=img.width,
                             caption="Global Threshold           Adaptive Threshold       Combined Threshold",
                             caption_offset=(x_start, 0))
-        img.composite(thr_row, left=mpos(thr_row.width), top=height)
+        img.composite(thr_row, left=int(mpos(thr_row.width)), top=int(height))
 
     if len(img_paths) >= 7:
         opened = imgs[6]    # Opened image.
@@ -195,7 +195,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
                             horizontal_gap, fixed_width=img.width,
                             caption="Combined Threshold         2x2 Kernel               Opened Image",
                             caption_offset=(x_start, 0))
-        img.composite(open_row, left=mpos(open_row.width), top=height)
+        img.composite(open_row, left=int(mpos(open_row.width)), top=int(height))
 
     if len(img_paths) >= 8:
         dilated = imgs[7]    # Dilated image.
@@ -214,7 +214,7 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
                             horizontal_gap, fixed_width=img.width,
                             caption="Opened Image               3x3 Kernel               Dilated Image",
                             caption_offset=(x_start, 0))
-        img.composite(dilated_row, left=mpos(dilated_row.width), top=height)
+        img.composite(dilated_row, left=int(mpos(dilated_row.width)), top=int(height))
 
     if len(img_paths) >= 10:
         combined = imgs[8]    # Combined image (re-inverted).
@@ -224,14 +224,14 @@ def compose_img(img_paths=None, match_json=None, gap=5, horizontal_gap=5, descri
 
         # Inverted image and contour.
         contour_row = create_row([combined, contours], [0, 0], horizontal_gap, caption="  Re-Inverted         Contours")
-        img.composite(contour_row, left=mpos(contour_row.width), top=height)
+        img.composite(contour_row, left=int(mpos(contour_row.width)), top=int(height))
 
     if len(img_paths) >= 11:        
         final = imgs[10]    # Final image.
         height += contour_row.height + 2 * gap
 
         # Final.
-        img.composite(final, left=mpos(final.width), top=height)
+        img.composite(final, left=int(mpos(final.width)), top=int(height))
         height += final.height + gap
 
     return img
