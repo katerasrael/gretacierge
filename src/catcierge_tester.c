@@ -258,6 +258,7 @@ int main(int argc, char **argv)
 				printf("  No match! %f\n", match_res);
 				match_color = CV_RGB(255, 0, 0);
 			}
+			printf("  Rect_count %d\n", (int)result.rect_count);
 
 			if (ctx.show || ctx.save)
 			{

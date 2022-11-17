@@ -316,6 +316,8 @@ int catcierge_haar_matcher_find_prey_adaptive(catcierge_haar_matcher_t *ctx,
 	// If we get more than 1 contour we count it as a prey.
 	contour_count = catcierge_haar_matcher_count_contours(ctx, contours);
 
+	if (ctx->super.debug) printf("catcierge_haar_matcher_find_prey_adaptive contour_count: %d\n", contour_count);
+
 	if (save_steps)
 	{
 		IplImage *img_contour = cvCloneImage(img);
@@ -371,6 +373,7 @@ int catcierge_haar_matcher_find_prey(catcierge_haar_matcher_t *ctx,
 	// If we get more than 1 contour we count it as a prey. At least something
 	// is intersecting the white are to split up the image.
 	contour_count = catcierge_haar_matcher_count_contours(ctx, contours);
+	if (ctx->super.debug) printf("catcierge_haar_matcher_find_prey contour_count: %d\n", contour_count);
 
 	// If we don't find any prey 
 	if ((args->prey_steps >= 2) && (contour_count == 1))
@@ -504,6 +507,7 @@ double catcierge_haar_matcher_match(void *octx,
 		goto fail;
 	}
 
+	// print the number of found interesting Regions
 	if (ctx->super.debug) printf("Rect count: %d\n", (int)result->rect_count);
 
 	cat_head_found = (result->rect_count > 0);
@@ -529,9 +533,25 @@ double catcierge_haar_matcher_match(void *octx,
 		// Only use the lower part of the region of interest
 		// and extend it some towards the "outside" for better result.
 		// (We only use the first haar cascade match).
-		roi = result->match_rects[0];
+		// chaged that, now we use the lowest rect (summation of y and height)
+		int i=0, t=0;
 
-		if (ctx->super.debug) printf("Cat Head found. ROI: %d %d %d %d\n", roi.x, roi.y, roi.width, roi.height);
+		while(i+1 < result->rect_count)
+		{
+			CvRect roi0, roi1;
+			roi0 = result->match_rects[i];
+			roi1 = result->match_rects[i+1];
+
+			if((roi0.y + roi0.height) > (roi1.y + roi1.height))
+				t = i;
+			else
+				t = i + 1;
+			i++;
+		}
+
+		roi = result->match_rects[t];
+
+		if (ctx->super.debug) printf("Cat Head found. picked ROI Nr: %d (%d %d %d %d)\n", t, roi.x, roi.y, roi.width, roi.height);
 
 		// If we're saving steps, include the original haar cascade
 		// match rectangle image.
@@ -597,6 +617,7 @@ double catcierge_haar_matcher_match(void *octx,
 		}
 		else
 		{
+			if (ctx->super.debug) printf("No prey detected\n");
 
 			ret = HAAR_SUCCESS;
 			snprintf(result->description, sizeof(result->description) - 1,
